@@ -879,7 +879,7 @@ async function sendAI() {
 
   try {
     const res=await fetch(CLAUDE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      model:'claude-sonnet-4-6',max_tokens:1000,
       system:`You are an intelligent schedule assistant for PlannerAI. Build practical schedules based on user input. Always respond conversationally AND include a JSON block (wrapped in triple backtick json) with schedule blocks. Each block: {"name":string,"type":"school"|"work"|"personal"|"health","start":"HH:MM","end":"HH:MM","notifMins":10,"priority":"high"|"medium"|"low"}. Only output blocks for today's representative schedule. Be specific and realistic.${surveyCtx}${profileCtx}`,
       messages:aiConversation
     })});
