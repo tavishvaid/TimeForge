@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <title>TimeForge — Your Intelligent Daily Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -204,9 +205,42 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 .exam-banner{background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(248,113,113,0.08));border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
 /* PRODUCTIVITY SCORE */
 .score-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;font-family:var(--font-display);border:3px solid var(--accent);flex-shrink:0}
+/* AUTH SCREEN */
+.auth-screen{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center}
+.auth-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:36px;width:380px;max-width:90vw;text-align:center}
+.auth-logo{width:48px;height:48px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#0f0f13;font-size:26px;margin:0 auto 16px}
+.auth-title{font-family:var(--font-display);font-size:28px;margin-bottom:4px}
+.auth-title span{color:var(--accent)}
+.auth-sub{font-size:13px;color:var(--text2);margin-bottom:28px}
+.auth-form{display:flex;flex-direction:column;gap:12px;text-align:left}
+.auth-divider{text-align:center;font-size:12px;color:var(--text3);margin:4px 0}
+.auth-switch{font-size:13px;color:var(--text2);margin-top:16px}
+.auth-switch span{color:var(--accent);text-decoration:underline;cursor:pointer}
+.auth-error{font-size:12px;color:var(--red);text-align:center;min-height:16px;margin-top:4px}
+.user-dropdown{position:absolute;bottom:110%;left:0;right:0;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:4px;display:none;z-index:100}
+.user-dropdown.open{display:block}
+.user-dropdown button{width:100%;padding:8px 10px;background:none;border:none;color:var(--text2);font-size:13px;font-family:var(--font);cursor:pointer;border-radius:6px;text-align:left;display:flex;align-items:center;gap:8px}
+.user-dropdown button:hover{background:var(--bg3);color:var(--text)}
 </style>
 </head>
 <body>
+
+<!-- AUTH SCREEN -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo"><i class="ti ti-hammer"></i></div>
+    <div class="auth-title">Time<span>Forge</span></div>
+    <div class="auth-sub">Your intelligent daily planner</div>
+    <div class="auth-form">
+      <div class="form-group"><label>Email</label><input type="email" id="authEmail" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="authPassword" placeholder="••••••••"></div>
+      <div class="form-group" id="authNameGroup" style="display:none"><label>Your name</label><input type="text" id="authName" placeholder="e.g. Tavisha"></div>
+      <div class="auth-error" id="authError"></div>
+      <button class="btn primary" style="width:100%;justify-content:center" onclick="handleAuth()" id="authBtn"><i class="ti ti-login"></i> Sign in</button>
+    </div>
+    <div class="auth-switch" id="authSwitch">Don't have an account? <span onclick="toggleAuthMode()">Sign up</span></div>
+  </div>
+</div>
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- MODALS -->
@@ -305,8 +339,11 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-medical"></i> Medical & Edu</div>
     <div class="nav-item" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</div>
   </nav>
-  <div class="sidebar-footer">
-    <div class="user-chip"><div class="user-avatar" id="userInitial">U</div><div><div style="font-size:13px;font-weight:500" id="userName">Your name</div><div style="font-size:11px;color:var(--text3)">TimeForge</div></div></div>
+  <div class="sidebar-footer" style="position:relative">
+    <div class="user-dropdown" id="userDropdown">
+      <button onclick="signOut()"><i class="ti ti-logout"></i> Sign out</button>
+    </div>
+    <div class="user-chip" onclick="document.getElementById('userDropdown').classList.toggle('open')" style="cursor:pointer"><div class="user-avatar" id="userInitial">U</div><div><div style="font-size:13px;font-weight:500" id="userName">Your name</div><div style="font-size:11px;color:var(--text3)" id="userEmail">TimeForge</div></div><i class="ti ti-chevron-up" style="margin-left:auto;font-size:14px;color:var(--text3)"></i></div>
   </div>
 </aside>
 
@@ -653,6 +690,114 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 </div>
 
 <script>
+const SUPABASE_URL = 'https://ijzjpwwluqfeiyrtqpxh.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlqempwd3dsdXFmZWl5cnRxcHhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjM4MDksImV4cCI6MjA5NjQ5OTgwOX0.haCmIUBaC1ZTRI6we6gCQpRFjZzH2aQ6ejkqvNCyflo';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let authMode = 'signin'; // 'signin' or 'signup'
+
+function toggleAuthMode() {
+  authMode = authMode === 'signin' ? 'signup' : 'signin';
+  document.getElementById('authBtn').innerHTML = authMode === 'signin' ? '<i class="ti ti-login"></i> Sign in' : '<i class="ti ti-user-plus"></i> Create account';
+  document.getElementById('authSwitch').innerHTML = authMode === 'signin' ? "Don't have an account? <span onclick=\"toggleAuthMode()\">Sign up</span>" : "Already have an account? <span onclick=\"toggleAuthMode()\">Sign in</span>";
+  document.getElementById('authNameGroup').style.display = authMode === 'signup' ? 'flex' : 'none';
+  document.getElementById('authError').textContent = '';
+}
+
+async function handleAuth() {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  const btn = document.getElementById('authBtn');
+  if (!email || !password) { errEl.textContent = 'Please enter email and password.'; return; }
+  btn.innerHTML = '<div class="spinner"></div>';
+  btn.disabled = true;
+  errEl.textContent = '';
+  try {
+    if (authMode === 'signup') {
+      const name = document.getElementById('authName').value.trim();
+      const { data, error } = await sb.auth.signUp({ email, password, options: { data: { name } } });
+      if (error) throw error;
+      if (data.user && !data.session) { errEl.style.color = 'var(--green)'; errEl.textContent = 'Check your email to confirm your account!'; }
+    } else {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+    }
+  } catch (e) {
+    errEl.style.color = 'var(--red)';
+    errEl.textContent = e.message || 'Something went wrong.';
+  }
+  btn.innerHTML = authMode === 'signin' ? '<i class="ti ti-login"></i> Sign in' : '<i class="ti ti-user-plus"></i> Create account';
+  btn.disabled = false;
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  document.getElementById('userDropdown').classList.remove('open');
+  document.getElementById('authScreen').style.display = 'flex';
+}
+
+async function loadFromCloud() {
+  if (!currentUser) return;
+  try {
+    const { data, error } = await sb.from('user_data').select('data').eq('id', currentUser.id).single();
+    if (data?.data) {
+      const d = data.data;
+      if (d.blocks) blocks = d.blocks;
+      if (d.notes) notes = d.notes;
+      if (d.checklist) checklist = d.checklist;
+      if (d.deferredBlocks) deferredBlocks = d.deferredBlocks;
+      if (d.weekHistory) weekHistory = d.weekHistory;
+      if (d.surveyHistory) surveyHistory = d.surveyHistory;
+      if (d.profileSummary) profileSummary = d.profileSummary;
+      if (d.userName) { userName = d.userName; document.getElementById('userNameInput').value = userName; }
+      if (d.healthGoals) { healthGoals = d.healthGoals; document.getElementById('waterGoalInput').value = healthGoals.water; document.getElementById('calGoalInput').value = healthGoals.calories; document.getElementById('fitnessGoal').value = healthGoals.fitness; document.getElementById('mentalGoal').value = healthGoals.mental; }
+      if (d.wellness) wellness = d.wellness;
+      if (d.streak) streak = d.streak;
+      if (d.budget) { budget = d.budget; document.getElementById('budgetIncome').value = budget.income||''; document.getElementById('budgetSavingsPct').value = budget.savingsPct||20; }
+      if (d.bills) bills = d.bills;
+      if (d.goals) goals = d.goals;
+      if (d.aiConversation) { aiConversation = d.aiConversation; }
+    }
+  } catch(e) {}
+}
+
+async function saveToCloud() {
+  if (!currentUser) return;
+  const d = { blocks, notes, checklist, deferredBlocks, weekHistory, surveyHistory, profileSummary, userName, healthGoals, wellness, streak, budget, bills, goals, aiConversation };
+  try {
+    await sb.from('user_data').upsert({ id: currentUser.id, data: d, updated_at: new Date().toISOString() });
+  } catch(e) {}
+}
+
+// Auth state listener
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (session?.user) {
+    currentUser = session.user;
+    const name = session.user.user_metadata?.name || session.user.email.split('@')[0];
+    userName = name;
+    document.getElementById('userName').textContent = name;
+    document.getElementById('userInitial').textContent = name[0].toUpperCase();
+    document.getElementById('userEmail').textContent = session.user.email;
+    document.getElementById('authScreen').style.display = 'none';
+    await loadFromCloud();
+    render(); scheduleNotifications(); renderPresets();
+    if (aiConversation.length) renderAIMessages();
+    renderUploads(); renderBudget(); renderBills(); renderGoals();
+    fetchMarkets(); setInterval(fetchMarkets, 60000);
+  } else {
+    currentUser = null;
+    document.getElementById('authScreen').style.display = 'flex';
+  }
+});
+
+// Enter key on auth form
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('authPassword').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
+  document.getElementById('authEmail').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
+});
+
 const API = '/api/claude';
 let blocks=[],notes=[],checklist={},deferredBlocks=[],aiPendingBlocks=[],notifTimers={},weekHistory={},surveyHistory=[],uploadedFiles={medical:[],educational:[]},profileSummary='',aiConversation=[],userName='User',healthGoals={fitness:'maintenance',mental:'none',water:8,calories:2000},wellness={water:0,calories:0},streak=0,deferTarget=null,taskConfirmTarget=null,recognition=null;
 let budget={income:0,savingsPct:20,expenses:[]},bills=[],goals=[];
@@ -704,7 +849,7 @@ function loadAll(){
   renderUploads();renderBudget();renderBills();renderGoals();
   fetchMarkets();setInterval(fetchMarkets,60000);
 }
-function saveAll(){save('blocks',blocks);save('notes',notes);save('checklist',checklist);save('deferred',deferredBlocks);save('weekHistory',weekHistory);save('surveys',surveyHistory);save('profile',profileSummary);save('userName',userName);save('aiConvo',aiConversation);save('uploads',uploadedFiles);save('healthGoals',healthGoals);save('wellness_'+todayKey(),wellness);save('streak',streak);save('budget',budget);save('bills',bills);save('goals',goals);}
+function saveAll(){save('blocks',blocks);save('notes',notes);save('checklist',checklist);save('deferred',deferredBlocks);save('weekHistory',weekHistory);save('surveys',surveyHistory);save('profile',profileSummary);save('userName',userName);save('aiConvo',aiConversation);save('uploads',uploadedFiles);save('healthGoals',healthGoals);save('wellness_'+todayKey(),wellness);save('streak',streak);save('budget',budget);save('bills',bills);save('goals',goals);saveToCloud();}
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
 function fmt(t){const[h,m]=t.split(':').map(Number);const ap=h>=12?'pm':'am';return`${h%12||12}:${m.toString().padStart(2,'0')} ${ap}`;}
@@ -1199,7 +1344,7 @@ async function getAutoFinanceAdvice(){
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 setInterval(()=>{render();scheduleNotifications();},60000);
-loadAll();
+// Auth state change handles initialization — see onAuthStateChange above
 </script>
 </body>
 </html>
