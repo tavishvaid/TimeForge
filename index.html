@@ -3,40 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PlannerAI — Your Intelligent Daily Planner</title>
+<title>TimeForge — Your Intelligent Daily Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css">
 <style>
-:root {
-  --bg: #0f0f13;
-  --bg2: #16161d;
-  --bg3: #1e1e28;
-  --bg4: #252532;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #f0efe8;
-  --text2: #9998a8;
-  --text3: #666578;
-  --accent: #c8f064;
-  --accent2: #a8d84a;
-  --blue: #6fa3ef;
-  --purple: #a78bfa;
-  --amber: #fbbf24;
-  --red: #f87171;
-  --green: #34d399;
-  --teal: #2dd4bf;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --font: 'DM Sans', sans-serif;
-  --font-display: 'DM Serif Display', serif;
-  --sidebar-w: 240px;
-  --transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-}
+:root{--bg:#0f0f13;--bg2:#16161d;--bg3:#1e1e28;--bg4:#252532;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#f0efe8;--text2:#9998a8;--text3:#666578;--accent:#c8f064;--accent2:#a8d84a;--blue:#6fa3ef;--purple:#a78bfa;--amber:#fbbf24;--red:#f87171;--green:#34d399;--teal:#2dd4bf;--radius:12px;--radius-sm:8px;--font:'DM Sans',sans-serif;--font-display:'DM Serif Display',serif;--sidebar-w:240px;--transition:all 0.2s cubic-bezier(0.4,0,0.2,1)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;overflow:hidden;font-size:14px}
-
-/* ─── SIDEBAR ─── */
 .sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;flex-shrink:0;position:relative;z-index:10}
 .logo{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0f0f13;font-size:18px}
@@ -52,32 +26,25 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sidebar-footer{padding:14px;border-top:1px solid var(--border)}
 .user-chip{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg3)}
 .user-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#0f0f13;font-weight:700;font-size:12px;flex-shrink:0}
-.user-name{font-size:13px;font-weight:500}
-.user-sub{font-size:11px;color:var(--text3)}
-
-/* ─── MAIN ─── */
 .main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .topbar{padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0}
-.topbar-title{font-size:16px;font-weight:500}
 .topbar-right{display:flex;align-items:center;gap:8px}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-family:var(--font);transition:var(--transition)}
-.btn:hover{background:var(--bg4);border-color:var(--border2)}
+.btn:hover{background:var(--bg4)}
 .btn.primary{background:var(--accent);color:#0f0f13;border-color:var(--accent)}
-.btn.primary:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn.primary:hover{background:var(--accent2)}
 .btn.ghost{background:transparent;border-color:transparent}
 .btn.ghost:hover{background:var(--bg3)}
 .btn.danger{background:transparent;color:var(--red);border-color:rgba(248,113,113,0.3)}
-.btn.danger:hover{background:rgba(248,113,113,0.1)}
+.btn.motivate{background:linear-gradient(135deg,#a78bfa,#6fa3ef);color:#fff;border:none;font-weight:600;font-size:14px;padding:10px 20px}
+.btn.motivate:hover{opacity:0.9}
+.btn.exam{background:linear-gradient(135deg,var(--amber),var(--red));color:#0f0f13;border:none;font-weight:600}
 .btn i{font-size:16px}
 .btn-sm{padding:5px 10px;font-size:12px}
 .content{flex:1;overflow-y:auto;padding:24px}
-
-/* ─── PAGES ─── */
 .page{display:none;animation:fadeUp 0.3s ease}
 .page.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ─── CARDS ─── */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
 .card-sm{padding:14px}
 .card-title{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:6px}
@@ -85,14 +52,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-
-/* ─── METRICS ─── */
+.five-col{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
 .metric-label{font-size:11px;color:var(--text3);font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px}
 .metric-value{font-size:28px;font-weight:600;font-family:var(--font-display);line-height:1}
 .metric-sub{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* ─── FORM ─── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-group{display:flex;flex-direction:column;gap:5px}
 .form-group.full{grid-column:1/-1}
@@ -105,8 +69,6 @@ input[type=file]{padding:6px}
 input[type=range]{padding:4px 0;accent-color:var(--accent)}
 input[type=number]{width:80px}
 input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
-
-/* ─── SCHEDULE BLOCKS ─── */
 .block-list{display:flex;flex-direction:column;gap:8px}
 .block-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg3);position:relative;overflow:hidden;transition:var(--transition)}
 .block-item:hover{border-color:var(--border2)}
@@ -116,60 +78,45 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 .block-item.personal::before{background:var(--amber)}
 .block-item.health::before{background:var(--teal)}
 .block-item.active-now{border-color:rgba(200,240,100,0.3);background:rgba(200,240,100,0.04)}
-.block-time{font-size:12px;color:var(--text3);min-width:100px;font-variant-numeric:tabular-nums}
+.block-time{font-size:12px;color:var(--text3);min-width:100px}
 .block-name{font-size:14px;font-weight:500;flex:1}
-.block-note{font-size:11px;color:var(--text3);flex:1}
 .tag{font-size:10px;padding:3px 8px;border-radius:100px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
 .tag-school{background:rgba(111,163,239,0.15);color:var(--blue)}
 .tag-work{background:rgba(52,211,153,0.15);color:var(--green)}
 .tag-personal{background:rgba(251,191,36,0.15);color:var(--amber)}
 .tag-health{background:rgba(45,212,191,0.15);color:var(--teal)}
-.tag-done{background:rgba(52,211,153,0.15);color:var(--green)}
-.tag-pending{background:rgba(251,191,36,0.15);color:var(--amber)}
 .now-badge{font-size:10px;background:rgba(200,240,100,0.15);color:var(--accent);padding:2px 8px;border-radius:100px;font-weight:600}
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px 6px;border-radius:6px;font-size:17px;display:flex;align-items:center;transition:var(--transition)}
 .icon-btn:hover{color:var(--text);background:var(--bg4)}
-
-/* ─── CHECKLIST ─── */
 .checklist-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg3);margin-bottom:8px;transition:var(--transition)}
 .checklist-item.done{opacity:0.5}
 .checklist-item.done .block-name{text-decoration:line-through;color:var(--text3)}
 .check-label{flex:1;cursor:pointer}
 .defer-btn{font-size:11px;padding:3px 8px;background:rgba(251,191,36,0.1);color:var(--amber);border:1px solid rgba(251,191,36,0.2);border-radius:100px;cursor:pointer;font-family:var(--font);transition:var(--transition)}
 .defer-btn:hover{background:rgba(251,191,36,0.2)}
-
-/* ─── PROGRESS ─── */
 .progress-bar{height:5px;background:var(--bg4);border-radius:100px;overflow:hidden;margin-top:6px}
 .progress-fill{height:100%;border-radius:100px;transition:width 0.5s ease}
-
-/* ─── TOAST ─── */
 .toast-container{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:12px 16px;max-width:300px;pointer-events:all;animation:toastIn 0.3s ease;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .toast.warning{border-left:3px solid var(--amber)}
 .toast.success{border-left:3px solid var(--green)}
 .toast.info{border-left:3px solid var(--blue)}
+.toast.motivate{border-left:3px solid var(--purple)}
 .toast-title{font-size:13px;font-weight:600;margin-bottom:2px}
 .toast-body{font-size:12px;color:var(--text2)}
 @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-
-/* ─── MODAL ─── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:24px;width:520px;max-width:90vw;max-height:85vh;overflow-y:auto;animation:modalIn 0.25s ease}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:24px;width:560px;max-width:90vw;max-height:88vh;overflow-y:auto;animation:modalIn 0.25s ease}
 @keyframes modalIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 .modal-title{font-family:var(--font-display);font-size:22px;margin-bottom:4px}
 .modal-sub{font-size:13px;color:var(--text2);margin-bottom:20px}
-.modal-close{position:absolute;top:16px;right:16px}
-
-/* ─── TOGGLE ─── */
 .toggle{position:relative;width:40px;height:22px;flex-shrink:0}
 .toggle input{opacity:0;width:0;height:0}
 .toggle-slider{position:absolute;inset:0;background:var(--bg4);border-radius:100px;cursor:pointer;border:1px solid var(--border2);transition:var(--transition)}
 .toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:var(--text3);border-radius:50%;transition:var(--transition)}
 .toggle input:checked+.toggle-slider{background:var(--accent);border-color:var(--accent)}
 .toggle input:checked+.toggle-slider::before{transform:translateX(18px);background:#0f0f13}
-
-/* ─── AI CHAT ─── */
 .ai-messages{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;max-height:320px;overflow-y:auto;padding-right:4px}
 .msg{padding:12px 14px;border-radius:var(--radius-sm);font-size:13.5px;line-height:1.65}
 .msg.user{background:rgba(200,240,100,0.08);border:1px solid rgba(200,240,100,0.15);margin-left:40px}
@@ -179,8 +126,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 .ai-input-row input{flex:1}
 .spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ─── WEEKLY REPORT ─── */
 .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px}
 .day-col{background:var(--bg3);border-radius:var(--radius-sm);padding:8px;text-align:center;border:1px solid var(--border)}
 .day-col.today{border-color:var(--accent);background:rgba(200,240,100,0.05)}
@@ -188,8 +133,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 .day-bar{height:60px;display:flex;align-items:flex-end;justify-content:center}
 .day-bar-fill{width:24px;border-radius:4px 4px 0 0;background:var(--accent);opacity:0.7;transition:height 0.5s ease}
 .day-pct{font-size:12px;font-weight:600;margin-top:4px;color:var(--text2)}
-
-/* ─── SURVEY ─── */
 .survey-q{margin-bottom:20px}
 .survey-q p{font-size:14px;font-weight:500;margin-bottom:10px}
 .survey-options{display:flex;flex-wrap:wrap;gap:8px}
@@ -199,52 +142,71 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
 .rating-row{display:flex;gap:6px}
 .rating-btn{width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;font-size:13px;font-weight:500;font-family:var(--font);transition:var(--transition)}
 .rating-btn:hover,.rating-btn.selected{border-color:var(--accent);background:rgba(200,240,100,0.1);color:var(--accent)}
-
-/* ─── TIMELINE ─── */
 .timeline{padding-left:28px;position:relative}
 .timeline::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:1px;background:var(--border)}
 .tl-item{position:relative;margin-bottom:16px}
-.tl-dot{position:absolute;left:-28px;top:4px;width:18px;height:18px;border-radius:50%;border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:9px}
+.tl-dot{position:absolute;left:-28px;top:4px;width:18px;height:18px;border-radius:50%;border:2px solid var(--bg2)}
 .tl-dot.school{background:var(--blue)}
 .tl-dot.work{background:var(--green)}
 .tl-dot.personal{background:var(--amber)}
 .tl-dot.health{background:var(--teal)}
-.tl-time{font-size:11px;color:var(--text3);margin-bottom:2px;font-variant-numeric:tabular-nums}
+.tl-time{font-size:11px;color:var(--text3);margin-bottom:2px}
 .tl-name{font-size:14px;font-weight:500}
 .tl-note{font-size:12px;color:var(--text3);margin-top:2px}
-
-/* ─── UPLOAD ─── */
 .upload-zone{border:2px dashed var(--border2);border-radius:var(--radius);padding:28px;text-align:center;cursor:pointer;transition:var(--transition);position:relative}
 .upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(200,240,100,0.03)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .upload-icon{font-size:32px;color:var(--text3);margin-bottom:8px}
 .upload-label{font-size:13px;color:var(--text2);margin-bottom:4px}
 .upload-sub{font-size:11px;color:var(--text3)}
-.upload-list{display:flex;flex-direction:column;gap:6px;margin-top:12px}
-.upload-file{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg3);border:1px solid var(--border);font-size:12px}
+.upload-file{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg3);border:1px solid var(--border);font-size:12px;margin-top:6px}
 .upload-file i{color:var(--accent);font-size:16px}
-
-/* ─── MISC ─── */
 .empty{text-align:center;padding:40px 20px;color:var(--text3)}
 .empty i{font-size:36px;display:block;margin-bottom:10px;opacity:0.4}
 .empty p{font-size:13px}
 .divider{height:1px;background:var(--border);margin:16px 0}
-.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}
 .row{display:flex;align-items:center;gap:10px}
 .row.between{justify-content:space-between}
-.gap-sm{gap:6px}
 .mt-sm{margin-top:8px}
 .mt-md{margin-top:16px}
 .text-sm{font-size:12px}
 .text-muted{color:var(--text2)}
 .text-accent{color:var(--accent)}
-.font-display{font-family:var(--font-display)}
-.w-full{width:100%}
+/* PRESET CHIPS */
+.preset-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.preset-chip{padding:6px 12px;border-radius:100px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;transition:var(--transition);display:flex;align-items:center;gap:5px}
+.preset-chip:hover{border-color:var(--accent);color:var(--accent)}
+.preset-chip.selected{border-color:var(--accent);background:rgba(200,240,100,0.1);color:var(--accent)}
+/* MOTIVATE MODAL */
+.motivate-modal{background:linear-gradient(135deg,#1a1030,#0f1a20);border:1px solid rgba(167,139,250,0.3)}
+.motivate-response{font-size:15px;line-height:1.8;color:var(--text);white-space:pre-wrap;margin-top:16px;padding:16px;background:rgba(167,139,250,0.05);border-radius:var(--radius-sm);border:1px solid rgba(167,139,250,0.15)}
+/* HEALTH TRACKER */
+.health-ring{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:12px}
+.ring-info{flex:1}
+.ring-label{font-size:12px;color:var(--text3);margin-bottom:4px}
+.ring-value{font-size:20px;font-weight:600}
+.ring-bar{flex:2}
+/* STREAK */
+.streak-display{text-align:center;padding:20px;background:linear-gradient(135deg,rgba(200,240,100,0.05),rgba(200,240,100,0.02));border-radius:var(--radius);border:1px solid rgba(200,240,100,0.1)}
+.streak-num{font-size:48px;font-weight:700;font-family:var(--font-display);color:var(--accent);line-height:1}
+.streak-label{font-size:13px;color:var(--text3);margin-top:4px}
+/* MIC BUTTON */
+.mic-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg3);border:1px solid var(--border2);cursor:pointer;transition:var(--transition);flex-shrink:0}
+.mic-btn:hover{border-color:var(--accent);color:var(--accent)}
+.mic-btn.recording{background:rgba(248,113,113,0.15);border-color:var(--red);color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,0.4)}50%{box-shadow:0 0 0 8px rgba(248,113,113,0)}}
+/* SOMETHING CAME UP */
+.came-up-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.came-up-btn{padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border2);background:var(--bg3);cursor:pointer;text-align:center;font-size:12px;font-weight:500;transition:var(--transition);font-family:var(--font);color:var(--text2)}
+.came-up-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(200,240,100,0.05)}
+.came-up-btn i{display:block;font-size:20px;margin-bottom:4px}
+/* EXAM MODE */
+.exam-banner{background:linear-gradient(135deg,rgba(251,191,36,0.08),rgba(248,113,113,0.08));border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius);padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+/* PRODUCTIVITY SCORE */
+.score-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;font-family:var(--font-display);border:3px solid var(--accent);flex-shrink:0}
 </style>
 </head>
 <body>
-
-<!-- TOAST -->
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- MODALS -->
@@ -253,81 +215,120 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="modal-title">Reschedule task</div>
     <div class="modal-sub" id="deferModalSub">Finding a free slot...</div>
     <div id="deferSuggestion" style="margin-bottom:16px"></div>
-    <div class="row">
-      <button class="btn primary" onclick="confirmDefer()">Confirm reschedule</button>
-      <button class="btn ghost" onclick="closeModal('deferModal')">Cancel</button>
-    </div>
+    <div class="row"><button class="btn primary" onclick="confirmDefer()">Confirm reschedule</button><button class="btn ghost" onclick="closeModal('deferModal')">Cancel</button></div>
   </div>
 </div>
 
 <div class="modal-overlay" id="surveyModal">
   <div class="modal">
     <div class="modal-title">Weekly check-in 🗓</div>
-    <div class="modal-sub">Help the AI learn your preferences better. Takes ~1 minute.</div>
+    <div class="modal-sub">Help the AI learn your preferences better.</div>
     <div id="surveyContent"></div>
-    <div class="row mt-md">
-      <button class="btn primary" onclick="submitSurvey()"><i class="ti ti-send"></i> Submit & update AI</button>
-      <button class="btn ghost" onclick="closeModal('surveyModal')">Later</button>
-    </div>
+    <div class="row mt-md"><button class="btn primary" onclick="submitSurvey()"><i class="ti ti-send"></i> Submit</button><button class="btn ghost" onclick="closeModal('surveyModal')">Later</button></div>
   </div>
 </div>
 
-<div class="modal-overlay" id="reportModal">
+<div class="modal-overlay" id="motivateModal">
+  <div class="modal motivate-modal">
+    <div class="modal-title" style="color:var(--purple)">✦ Your AI Coach</div>
+    <div class="modal-sub" id="motivateContext">Loading your schedule context...</div>
+    <div id="motivateResponse" class="motivate-response" style="display:none"></div>
+    <div id="motivateLoading" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);margin-top:12px"><div class="spinner"></div> Getting your coach ready...</div>
+    <div class="row mt-md"><button class="btn ghost" onclick="closeModal('motivateModal')">Close</button><button class="btn primary" onclick="runMotivate()" id="remotivatebtn" style="display:none"><i class="ti ti-refresh"></i> Motivate me again</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cameUpModal">
+  <div class="modal" style="width:420px">
+    <div class="modal-title">Something came up? 🔀</div>
+    <div class="modal-sub">Pick what happened and AI will reschedule your day.</div>
+    <div class="came-up-grid">
+      <button class="came-up-btn" onclick="handleCameUp('Meeting')"><i class="ti ti-users"></i>Meeting</button>
+      <button class="came-up-btn" onclick="handleCameUp('Get-together')"><i class="ti ti-confetti"></i>Get-together</button>
+      <button class="came-up-btn" onclick="handleCameUp('Emergency')"><i class="ti ti-alert-triangle"></i>Emergency</button>
+      <button class="came-up-btn" onclick="handleCameUp('Doctor visit')"><i class="ti ti-stethoscope"></i>Doctor visit</button>
+      <button class="came-up-btn" onclick="handleCameUp('Travel delay')"><i class="ti ti-car"></i>Travel delay</button>
+      <button class="came-up-btn" onclick="handleCameUp('Family commitment')"><i class="ti ti-home-heart"></i>Family</button>
+      <button class="came-up-btn" onclick="handleCameUp('Work overtime')"><i class="ti ti-briefcase"></i>Work OT</button>
+      <button class="came-up-btn" onclick="handleCameUp('Feeling unwell')"><i class="ti ti-mood-sick"></i>Unwell</button>
+      <button class="came-up-btn" onclick="handleCameUp('Something else')"><i class="ti ti-dots"></i>Other</button>
+    </div>
+    <div id="cameUpResult" style="margin-top:14px;font-size:13px;color:var(--text2);display:none"></div>
+    <div class="row mt-md"><button class="btn ghost" onclick="closeModal('cameUpModal')">Close</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="examModal">
   <div class="modal">
-    <div class="modal-title">Weekly report 📊</div>
-    <div class="modal-sub" id="reportModalDate"></div>
-    <div id="reportContent"></div>
-    <div class="row mt-md">
-      <button class="btn ghost" onclick="closeModal('reportModal')">Close</button>
+    <div class="modal-title">Exam Mode 📚</div>
+    <div class="modal-sub">Tell the AI about your upcoming exams and it will build a study plan.</div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Subjects & exam dates</label><textarea id="examInput" placeholder="e.g. Physics exam on 20th June, Biology on 25th June, Maths on 28th June. I study best in the morning." rows="4"></textarea></div>
+      <div class="form-group"><label>Hours available per day</label><input type="number" id="examHours" value="4" min="1" max="12" style="width:100%"></div>
+      <div class="form-group"><label>Preferred study session</label>
+        <select id="examSession"><option value="morning">Morning</option><option value="afternoon">Afternoon</option><option value="evening">Evening</option><option value="mixed">Mixed</option></select>
+      </div>
+    </div>
+    <div class="row mt-md"><button class="btn exam" onclick="generateExamPlan()"><i class="ti ti-sparkles"></i> Generate study plan</button><button class="btn ghost" onclick="closeModal('examModal')">Cancel</button></div>
+    <div id="examResult" style="margin-top:14px;display:none"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="taskConfirmModal">
+  <div class="modal" style="width:380px;text-align:center">
+    <div style="font-size:32px;margin-bottom:8px">✅</div>
+    <div class="modal-title" id="taskConfirmTitle">Did you complete this?</div>
+    <div class="modal-sub" id="taskConfirmSub"></div>
+    <div class="row mt-md" style="justify-content:center">
+      <button class="btn primary" onclick="confirmTaskDone(true)"><i class="ti ti-check"></i> Yes, done!</button>
+      <button class="btn danger" onclick="confirmTaskDone(false)"><i class="ti ti-clock"></i> Not yet</button>
     </div>
   </div>
 </div>
 
 <!-- APP -->
 <aside class="sidebar">
-  <div class="logo">
-    <div class="logo-icon"><i class="ti ti-brain"></i></div>
-    <div class="logo-text">Planner<span>AI</span></div>
-  </div>
+  <div class="logo"><div class="logo-icon"><i class="ti ti-hammer"></i></div><div class="logo-text">Time<span>Forge</span></div></div>
   <nav class="nav">
     <div class="nav-item active" onclick="showPage('dashboard',this)"><i class="ti ti-home-2"></i> Dashboard</div>
-    <div class="nav-item" onclick="showPage('checklist',this)"><i class="ti ti-list-check"></i> Today's checklist <span class="nav-badge" id="badgePending">0</span></div>
+    <div class="nav-item" onclick="showPage('checklist',this)"><i class="ti ti-list-check"></i> Checklist <span class="nav-badge" id="badgePending">0</span></div>
     <div class="nav-item" onclick="showPage('add',this)"><i class="ti ti-calendar-plus"></i> Add block</div>
     <div class="nav-item" onclick="showPage('ai',this)"><i class="ti ti-sparkles"></i> AI scheduler</div>
+    <div class="nav-item" onclick="showPage('health',this)"><i class="ti ti-heart-rate-monitor"></i> Health & wellness</div>
+    <div class="nav-item" onclick="showPage('finance',this)"><i class="ti ti-chart-line"></i> Finance</div>
     <div class="nav-section">Analysis</div>
     <div class="nav-item" onclick="showPage('weekly',this)"><i class="ti ti-chart-bar"></i> Weekly report</div>
     <div class="nav-item" onclick="showPage('timeline',this)"><i class="ti ti-timeline"></i> Timeline</div>
     <div class="nav-item" onclick="showPage('notes',this)"><i class="ti ti-notes"></i> Notes</div>
     <div class="nav-section">Settings</div>
     <div class="nav-item" onclick="showPage('notifications',this)"><i class="ti ti-bell"></i> Notifications</div>
-    <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-text"></i> Medical &amp; Education</div>
+    <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-medical"></i> Medical & Edu</div>
     <div class="nav-item" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</div>
   </nav>
   <div class="sidebar-footer">
-    <div class="user-chip">
-      <div class="user-avatar" id="userInitial">U</div>
-      <div><div class="user-name" id="userName">Your name</div><div class="user-sub">PlannerAI user</div></div>
-    </div>
+    <div class="user-chip"><div class="user-avatar" id="userInitial">U</div><div><div style="font-size:13px;font-weight:500" id="userName">Your name</div><div style="font-size:11px;color:var(--text3)">TimeForge</div></div></div>
   </div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <div class="topbar-title" id="topbarTitle">Dashboard</div>
+    <div style="font-size:16px;font-weight:500" id="topbarTitle">Dashboard</div>
     <div class="topbar-right">
-      <button class="btn btn-sm ghost" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</button>
-      <button class="btn btn-sm primary" onclick="openWeeklyReport()"><i class="ti ti-chart-bar"></i> Weekly report</button>
+      <button class="btn btn-sm motivate" onclick="openMotivate()"><i class="ti ti-mood-happy"></i> Motivate Me!</button>
+      <button class="btn btn-sm" onclick="openModal('cameUpModal')"><i class="ti ti-refresh-alert"></i> Something came up</button>
+      <button class="btn btn-sm" onclick="openModal('examModal')"><i class="ti ti-book"></i> Exam mode</button>
     </div>
   </div>
   <div class="content">
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="four-col" style="margin-bottom:16px">
-        <div class="metric"><div class="metric-label">Total blocks</div><div class="metric-value text-accent" id="m-total">0</div><div class="metric-sub">today</div></div>
-        <div class="metric"><div class="metric-label">Completed</div><div class="metric-value" style="color:var(--green)" id="m-done">0</div><div class="metric-sub">tasks done</div></div>
-        <div class="metric"><div class="metric-label">Focus hours</div><div class="metric-value" style="color:var(--blue)" id="m-hours">0h</div><div class="metric-sub">scheduled</div></div>
-        <div class="metric"><div class="metric-label">Completion</div><div class="metric-value" style="color:var(--purple)" id="m-pct">0%</div><div class="metric-sub">rate today</div></div>
+      <div class="five-col" style="margin-bottom:16px">
+        <div class="metric"><div class="metric-label">Blocks</div><div class="metric-value text-accent" id="m-total">0</div></div>
+        <div class="metric"><div class="metric-label">Done</div><div class="metric-value" style="color:var(--green)" id="m-done">0</div></div>
+        <div class="metric"><div class="metric-label">Hours</div><div class="metric-value" style="color:var(--blue)" id="m-hours">0h</div></div>
+        <div class="metric"><div class="metric-label">Score</div><div class="metric-value" style="color:var(--purple)" id="m-pct">0%</div></div>
+        <div class="metric"><div class="metric-label">Streak 🔥</div><div class="metric-value" style="color:var(--amber)" id="m-streak">0</div></div>
       </div>
       <div class="two-col">
         <div>
@@ -343,11 +344,32 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
         <div>
           <div class="card">
             <div class="card-title"><i class="ti ti-chart-donut"></i> Time breakdown</div>
-            <div id="breakdown"><div class="empty" style="padding:12px"><i class="ti ti-chart-bar"></i><p>No data yet.</p></div></div>
+            <div id="breakdown"><div class="empty" style="padding:12px"><i class="ti ti-chart-bar"></i><p>No data.</p></div></div>
           </div>
           <div class="card">
             <div class="card-title"><i class="ti ti-sparkles"></i> AI insight</div>
             <div id="aiInsight" style="font-size:13px;color:var(--text2);line-height:1.7">Add some blocks and the AI will offer personalized tips here.</div>
+          </div>
+          <div class="card" style="background:linear-gradient(135deg,rgba(200,240,100,0.04),transparent)">
+            <div class="card-title"><i class="ti ti-droplet"></i> Today's wellness</div>
+            <div class="row between mt-sm">
+              <span style="font-size:13px">💧 Water</span>
+              <div class="row" style="gap:6px">
+                <span id="waterCount" style="font-weight:600;color:var(--teal)">0</span>
+                <span style="color:var(--text3);font-size:12px">/ <span id="waterGoal">8</span> glasses</span>
+                <button class="icon-btn" onclick="addWater()"><i class="ti ti-plus"></i></button>
+              </div>
+            </div>
+            <div class="progress-bar mt-sm"><div class="progress-fill" id="waterBar" style="width:0%;background:var(--teal)"></div></div>
+            <div class="row between" style="margin-top:10px">
+              <span style="font-size:13px">🔥 Calories</span>
+              <div class="row" style="gap:6px">
+                <span id="calCount" style="font-weight:600;color:var(--amber)">0</span>
+                <span style="color:var(--text3);font-size:12px">/ <span id="calGoal">2000</span> kcal</span>
+                <button class="icon-btn" onclick="addCalories()"><i class="ti ti-plus"></i></button>
+              </div>
+            </div>
+            <div class="progress-bar mt-sm"><div class="progress-fill" id="calBar" style="width:0%;background:var(--amber)"></div></div>
           </div>
         </div>
       </div>
@@ -358,13 +380,13 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
       <div class="card">
         <div class="row between" style="margin-bottom:14px">
           <div class="card-title" style="margin:0"><i class="ti ti-list-check"></i> Today's checklist</div>
-          <span id="checklistProgress" class="text-sm text-muted">0 / 0 done</span>
+          <span id="checklistProgress" style="font-size:12px;color:var(--text2)">0 / 0 done</span>
         </div>
         <div class="progress-bar" style="margin-bottom:16px"><div class="progress-fill" id="checklistProgressBar" style="width:0%;background:var(--accent)"></div></div>
         <div id="checklistItems"><div class="empty"><i class="ti ti-list-check"></i><p>Add blocks to see your checklist.</p></div></div>
       </div>
       <div class="card" id="deferredCard" style="display:none">
-        <div class="card-title"><i class="ti ti-clock-pause"></i> Deferred tasks (rescheduled by AI)</div>
+        <div class="card-title"><i class="ti ti-clock-pause"></i> Deferred (rescheduled by AI)</div>
         <div id="deferredItems"></div>
       </div>
     </div>
@@ -372,61 +394,115 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <!-- ADD BLOCK -->
     <div class="page" id="page-add">
       <div class="card">
-        <div class="card-title"><i class="ti ti-calendar-plus"></i> Add a schedule block</div>
+        <div class="card-title"><i class="ti ti-layout-grid"></i> Quick-add presets</div>
+        <div style="margin-bottom:10px;font-size:12px;color:var(--text3)">📚 Study</div>
+        <div class="preset-grid" id="studyPresets"></div>
+        <div style="margin-bottom:10px;font-size:12px;color:var(--text3)">💪 Health & Fitness</div>
+        <div class="preset-grid" id="healthPresets"></div>
+        <div style="margin-bottom:10px;font-size:12px;color:var(--text3)">🌟 Personal</div>
+        <div class="preset-grid" id="personalPresets"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-calendar-plus"></i> Customise & add</div>
         <div class="form-grid">
-          <div class="form-group"><label>Block name</label><input type="text" id="blockName" placeholder="e.g. Biology, Work shift, Gym"></div>
+          <div class="form-group"><label>Block name</label><input type="text" id="blockName" placeholder="e.g. Biology, Gym, Work shift"></div>
           <div class="form-group"><label>Type</label>
             <select id="blockType"><option value="school">🎓 School</option><option value="work">💼 Work</option><option value="personal">🌟 Personal</option><option value="health">💪 Health</option></select>
           </div>
           <div class="form-group"><label>Start time</label><input type="time" id="blockStart" value="09:00"></div>
           <div class="form-group"><label>End time</label><input type="time" id="blockEnd" value="10:00"></div>
-          <div class="form-group full"><label>Notes (optional)</label><textarea id="blockNotes" placeholder="Any context about this block..."></textarea></div>
+          <div class="form-group full"><label>Notes (optional)</label><textarea id="blockNotes" placeholder="Any context..."></textarea></div>
           <div class="form-group"><label>Notify (mins before end)</label><input type="number" id="blockNotifMins" value="10" min="1" max="60" style="width:100%"></div>
           <div class="form-group"><label>Priority</label>
             <select id="blockPriority"><option value="high">🔴 High</option><option value="medium" selected>🟡 Medium</option><option value="low">🟢 Low</option></select>
           </div>
         </div>
-        <div class="row mt-md">
-          <button class="btn primary" onclick="addBlock()"><i class="ti ti-plus"></i> Add block</button>
-          <button class="btn ghost" onclick="clearBlockForm()"><i class="ti ti-x"></i> Clear</button>
-        </div>
+        <div class="row mt-md"><button class="btn primary" onclick="addBlock()"><i class="ti ti-plus"></i> Add block</button><button class="btn ghost" onclick="clearBlockForm()"><i class="ti ti-x"></i> Clear</button></div>
       </div>
     </div>
 
     <!-- AI SCHEDULER -->
     <div class="page" id="page-ai">
-      <!-- IMPORT CARD -->
       <div class="card">
-        <div class="card-title"><i class="ti ti-upload"></i> Import your schedule</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Upload a photo of your timetable, a PDF, or any document — the AI will read it and build your schedule automatically.</p>
+        <div class="card-title"><i class="ti ti-file-import"></i> Import your schedule</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Upload a photo of your timetable, PDF, or any document — AI reads it automatically.</p>
         <div class="upload-zone" id="importZone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleImportDrop(event)">
           <input type="file" id="importFileInput" accept="image/*,.pdf,.txt,.doc,.docx,.csv" multiple onchange="handleImportFiles(this.files)">
           <div class="upload-icon"><i class="ti ti-file-import"></i></div>
           <div class="upload-label">Drop a photo or file here, or click to browse</div>
-          <div class="upload-sub">Supports images (JPG, PNG), PDF, TXT, CSV, DOC</div>
+          <div class="upload-sub">Images, PDF, TXT, CSV, DOC</div>
         </div>
         <div id="importFileList" style="margin-top:10px"></div>
-        <div id="importParseStatus" style="margin-top:10px;font-size:13px;color:var(--text2);display:none">
-          <div class="row" style="gap:8px"><div class="spinner"></div> Reading your schedule...</div>
-        </div>
+        <div id="importParseStatus" style="margin-top:10px;font-size:13px;color:var(--text2);display:none"><div class="row" style="gap:8px"><div class="spinner"></div> Reading your schedule...</div></div>
       </div>
-
       <div class="card">
         <div class="card-title"><i class="ti ti-sparkles"></i> AI scheduler</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Describe your school times, work hours, preferences — Claude builds a timetable. Your medical/educational profile and survey history are automatically considered.</p>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Describe your day naturally — or use the mic. AI estimates durations, adds breaks, and builds your timetable.</p>
         <div class="ai-messages" id="aiMessages"></div>
         <div class="ai-input-row">
-          <input type="text" id="aiInput" placeholder="e.g. School 8am-3pm weekdays, work Tue-Thu 5-9pm, want gym 3x week..." onkeydown="if(event.key==='Enter')sendAI()">
+          <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Speak your schedule"><i class="ti ti-microphone"></i></button>
+          <input type="text" id="aiInput" placeholder='e.g. "Finish Physics Ch5, Biology revision 1hr, football at 5pm, sleep by 10pm"' onkeydown="if(event.key==='Enter')sendAI()">
           <button class="btn primary" onclick="sendAI()" id="aiSendBtn"><i class="ti ti-send"></i> Send</button>
         </div>
+        <div id="micStatus" style="font-size:11px;color:var(--red);margin-top:6px;display:none">🔴 Listening... speak now</div>
         <div class="row mt-sm" id="aiAddRow" style="display:none">
-          <button class="btn primary btn-sm" onclick="addAIBlocks()"><i class="ti ti-calendar-plus"></i> Add these to my schedule</button>
+          <button class="btn primary btn-sm" onclick="addAIBlocks()"><i class="ti ti-calendar-plus"></i> Add to my schedule</button>
           <button class="btn ghost btn-sm" onclick="document.getElementById('aiAddRow').style.display='none'">Dismiss</button>
         </div>
       </div>
       <div class="card" id="aiPreviewCard" style="display:none">
         <div class="card-title"><i class="ti ti-eye"></i> Preview — blocks to add</div>
         <div class="block-list" id="aiPreviewList"></div>
+      </div>
+    </div>
+
+    <!-- HEALTH & WELLNESS -->
+    <div class="page" id="page-health">
+      <div class="two-col">
+        <div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-target"></i> Health goals</div>
+            <div class="form-group" style="margin-bottom:12px"><label>Fitness goal</label>
+              <select id="fitnessGoal" onchange="saveHealthGoals()"><option value="weightloss">Weight loss</option><option value="weightgain">Weight gain</option><option value="maintenance" selected>Maintenance</option><option value="muscle">Muscle building</option><option value="endurance">Endurance</option></select>
+            </div>
+            <div class="form-group" style="margin-bottom:12px"><label>Mental wellness focus</label>
+              <select id="mentalGoal" onchange="saveHealthGoals()"><option value="none" selected>None</option><option value="anxiety">Anxiety relief</option><option value="depression">Depression support</option><option value="stress">Stress management</option><option value="focus">Focus & clarity</option><option value="sleep">Better sleep</option></select>
+            </div>
+            <div class="form-group" style="margin-bottom:12px"><label>Daily water goal (glasses)</label><input type="number" id="waterGoalInput" value="8" min="4" max="20" style="width:100%" onchange="saveHealthGoals()"></div>
+            <div class="form-group"><label>Daily calorie goal (kcal)</label><input type="number" id="calGoalInput" value="2000" min="1000" max="5000" style="width:100%" onchange="saveHealthGoals()"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-droplet"></i> Today's intake</div>
+            <div class="health-ring">
+              <div class="ring-info"><div class="ring-label">Water</div><div class="ring-value" style="color:var(--teal)" id="waterDisplay">0 glasses</div></div>
+              <div class="ring-bar"><div class="progress-bar"><div class="progress-fill" id="waterBarH" style="width:0%;background:var(--teal)"></div></div></div>
+              <button class="btn btn-sm primary" onclick="addWater()">+ Glass</button>
+            </div>
+            <div class="health-ring">
+              <div class="ring-info"><div class="ring-label">Calories</div><div class="ring-value" style="color:var(--amber)" id="calDisplay">0 kcal</div></div>
+              <div class="ring-bar"><div class="progress-bar"><div class="progress-fill" id="calBarH" style="width:0%;background:var(--amber)"></div></div></div>
+              <button class="btn btn-sm" onclick="addCalories()">+ Log</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-sparkles"></i> AI recommendations</div>
+            <div id="healthRecs" style="font-size:13px;color:var(--text2);line-height:1.7">Set your health goals and click below for personalized activity recommendations.</div>
+            <button class="btn btn-sm primary mt-md" onclick="getHealthRecs()"><i class="ti ti-sparkles"></i> Get recommendations</button>
+          </div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-flame"></i> Streak & productivity</div>
+            <div class="streak-display">
+              <div class="streak-num" id="streakNum">0</div>
+              <div class="streak-label">day streak 🔥</div>
+            </div>
+            <div class="row mt-md" style="justify-content:center;gap:16px">
+              <div style="text-align:center"><div style="font-size:20px;font-weight:600;color:var(--purple)" id="weeklyAvgScore">-</div><div style="font-size:11px;color:var(--text3)">Weekly avg</div></div>
+              <div style="text-align:center"><div style="font-size:20px;font-weight:600;color:var(--green)" id="bestDayScore">-</div><div style="font-size:11px;color:var(--text3)">Best day</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -438,29 +514,21 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
         <div class="three-col">
           <div class="metric card-sm"><div class="metric-label">Avg completion</div><div class="metric-value text-accent" id="wk-avg">-</div></div>
           <div class="metric card-sm"><div class="metric-label">Best day</div><div class="metric-value" style="color:var(--green)" id="wk-best">-</div></div>
-          <div class="metric card-sm"><div class="metric-label">Total hours</div><div class="metric-value" style="color:var(--blue)" id="wk-hours">-</div></div>
+          <div class="metric card-sm"><div class="metric-label">Total blocks</div><div class="metric-value" style="color:var(--blue)" id="wk-hours">-</div></div>
         </div>
       </div>
       <div class="card">
         <div class="card-title"><i class="ti ti-robot"></i> AI weekly summary</div>
         <div id="wkAISummary" style="font-size:13px;color:var(--text2);line-height:1.7">Complete some tasks this week and Claude will generate a personalized summary.</div>
-        <div class="row mt-sm">
-          <button class="btn btn-sm primary" onclick="generateWeeklySummary()"><i class="ti ti-sparkles"></i> Generate AI summary</button>
-        </div>
+        <button class="btn btn-sm primary mt-md" onclick="generateWeeklySummary()"><i class="ti ti-sparkles"></i> Generate summary</button>
       </div>
     </div>
 
     <!-- TIMELINE -->
     <div class="page" id="page-timeline">
       <div class="two-col">
-        <div class="card">
-          <div class="card-title"><i class="ti ti-timeline"></i> Chronological view</div>
-          <div class="timeline" id="timelineList"><div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div></div>
-        </div>
-        <div class="card">
-          <div class="card-title"><i class="ti ti-info-circle"></i> Cross-references</div>
-          <div id="crossRefList"><div class="empty"><i class="ti ti-link"></i><p>Notes linked to blocks will appear here.</p></div></div>
-        </div>
+        <div class="card"><div class="card-title"><i class="ti ti-timeline"></i> Chronological view</div><div class="timeline" id="timelineList"><div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div></div></div>
+        <div class="card"><div class="card-title"><i class="ti ti-link"></i> Cross-references</div><div id="crossRefList"><div class="empty"><i class="ti ti-link"></i><p>Notes linked to blocks appear here.</p></div></div></div>
       </div>
     </div>
 
@@ -470,672 +538,668 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
         <div class="card-title"><i class="ti ti-notes"></i> Add a note</div>
         <div class="form-grid">
           <div class="form-group"><label>Link to block</label><select id="noteBlock"><option value="">— none —</option></select></div>
-          <div class="form-group full"><label>Note content</label><textarea id="noteText" placeholder="Write anything — ideas, reminders, summaries..."></textarea></div>
+          <div class="form-group full"><label>Note</label><textarea id="noteText" placeholder="Write anything..."></textarea></div>
         </div>
         <button class="btn primary mt-sm" onclick="addNote()"><i class="ti ti-plus"></i> Save note</button>
       </div>
-      <div class="card">
-        <div class="card-title"><i class="ti ti-file-text"></i> All notes</div>
-        <div id="notesList"><div class="empty"><i class="ti ti-notes"></i><p>No notes yet.</p></div></div>
-      </div>
+      <div class="card"><div class="card-title"><i class="ti ti-file-text"></i> All notes</div><div id="notesList"><div class="empty"><i class="ti ti-notes"></i><p>No notes yet.</p></div></div></div>
     </div>
 
     <!-- NOTIFICATIONS -->
     <div class="page" id="page-notifications">
       <div class="card">
-        <div class="card-title"><i class="ti ti-bell"></i> Notification channels</div>
+        <div class="card-title"><i class="ti ti-bell"></i> Channels</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
-          <div class="row between" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm)">
-            <div><div style="font-size:14px;font-weight:500">Browser push notifications</div><div class="text-sm text-muted mt-sm">Alerts even when tab is in background</div></div>
-            <label class="toggle"><input type="checkbox" id="pushEnabled" onchange="togglePush()"><span class="toggle-slider"></span></label>
-          </div>
-          <div class="row between" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm)">
-            <div><div style="font-size:14px;font-weight:500">In-app banners</div><div class="text-sm text-muted mt-sm">Toast alerts shown inside PlannerAI</div></div>
-            <label class="toggle"><input type="checkbox" id="bannerEnabled" checked><span class="toggle-slider"></span></label>
-          </div>
+          <div class="row between" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm)"><div><div style="font-weight:500">Browser push</div><div class="text-sm text-muted mt-sm">Alerts in background</div></div><label class="toggle"><input type="checkbox" id="pushEnabled" onchange="togglePush()"><span class="toggle-slider"></span></label></div>
+          <div class="row between" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm)"><div><div style="font-weight:500">In-app banners</div><div class="text-sm text-muted mt-sm">Toasts inside the app</div></div><label class="toggle"><input type="checkbox" id="bannerEnabled" checked><span class="toggle-slider"></span></label></div>
+          <div class="row between" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm)"><div><div style="font-weight:500">Post-task confirmation</div><div class="text-sm text-muted mt-sm">Ask if task was completed after it ends</div></div><label class="toggle"><input type="checkbox" id="confirmEnabled" checked><span class="toggle-slider"></span></label></div>
         </div>
         <div class="card-title"><i class="ti ti-adjustments"></i> Per-block timing</div>
-        <div id="notifList"><div class="empty"><i class="ti ti-bell-off"></i><p>Add blocks to configure timing.</p></div></div>
+        <div id="notifList"><div class="empty"><i class="ti ti-bell-off"></i><p>Add blocks to configure.</p></div></div>
       </div>
     </div>
 
-    <!-- MEDICAL & EDUCATION REPORTS -->
+    <!-- MEDICAL & EDUCATION -->
     <div class="page" id="page-reports">
       <div class="card">
         <div class="card-title"><i class="ti ti-file-medical"></i> Upload reports</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Upload medical or educational reports so the AI can personalize your schedule based on your health and academic needs.</p>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Upload medical or educational reports so the AI can personalize your schedule.</p>
         <div class="two-col">
-          <div>
-            <label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Medical reports</label>
-            <div class="upload-zone" id="medZone">
-              <input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('medical',this)">
-              <div class="upload-icon"><i class="ti ti-file-medical"></i></div>
-              <div class="upload-label">Drop files or click to upload</div>
-              <div class="upload-sub">PDF, DOC, TXT</div>
-            </div>
-            <div class="upload-list" id="medFiles"></div>
-          </div>
-          <div>
-            <label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Educational reports</label>
-            <div class="upload-zone" id="eduZone">
-              <input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('educational',this)">
-              <div class="upload-icon"><i class="ti ti-school"></i></div>
-              <div class="upload-label">Drop files or click to upload</div>
-              <div class="upload-sub">PDF, DOC, TXT</div>
-            </div>
-            <div class="upload-list" id="eduFiles"></div>
-          </div>
+          <div><label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Medical reports</label><div class="upload-zone"><input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('medical',this)"><div class="upload-icon"><i class="ti ti-file-medical"></i></div><div class="upload-label">Drop or click</div><div class="upload-sub">PDF, DOC, TXT</div></div><div id="medFiles"></div></div>
+          <div><label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Educational reports</label><div class="upload-zone"><input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('educational',this)"><div class="upload-icon"><i class="ti ti-school"></i></div><div class="upload-label">Drop or click</div><div class="upload-sub">PDF, DOC, TXT</div></div><div id="eduFiles"></div></div>
         </div>
       </div>
       <div class="card">
         <div class="card-title"><i class="ti ti-robot"></i> Profile summary</div>
-        <div id="profileSummary" style="font-size:13px;color:var(--text2);line-height:1.7">No reports uploaded yet. Upload files above to let the AI personalize your schedule.</div>
-        <div class="row mt-sm" id="profileSumBtn" style="display:none">
-          <button class="btn btn-sm primary" onclick="generateProfileSummary()"><i class="ti ti-sparkles"></i> Generate profile</button>
-        </div>
+        <div id="profileSummary" style="font-size:13px;color:var(--text2);line-height:1.7">No reports uploaded yet.</div>
+        <button class="btn btn-sm primary mt-md" onclick="generateProfileSummary()"><i class="ti ti-sparkles"></i> Generate profile</button>
       </div>
+      <div class="card"><div class="card-title"><i class="ti ti-user"></i> Your name</div><div class="form-group" style="max-width:240px"><input type="text" id="userNameInput" placeholder="Enter your name" oninput="updateUserName()"></div></div>
+    </div>
+
+    <!-- FINANCE -->
+    <div class="page" id="page-finance">
       <div class="card">
-        <div class="card-title"><i class="ti ti-user"></i> Your name</div>
-        <div class="form-group" style="max-width:240px">
-          <input type="text" id="userNameInput" placeholder="Enter your name" oninput="updateUserName()">
+        <div class="card-title"><i class="ti ti-chart-line"></i> Market overview <span style="font-size:10px;color:var(--text3);font-weight:400;text-transform:none;margin-left:4px">auto-refreshes every 60s</span></div>
+        <div class="four-col">
+          <div class="metric"><div class="metric-label">Nifty 50</div><div class="metric-value" id="mk-nifty" style="font-size:18px">—</div><div class="metric-sub" id="mk-nifty-ch">loading...</div></div>
+          <div class="metric"><div class="metric-label">Sensex</div><div class="metric-value" id="mk-sensex" style="font-size:18px">—</div><div class="metric-sub" id="mk-sensex-ch">loading...</div></div>
+          <div class="metric"><div class="metric-label">S&amp;P 500</div><div class="metric-value" id="mk-sp" style="font-size:18px">—</div><div class="metric-sub" id="mk-sp-ch">loading...</div></div>
+          <div class="metric"><div class="metric-label">Gold (USD/oz)</div><div class="metric-value" id="mk-gold" style="font-size:18px">—</div><div class="metric-sub" id="mk-gold-ch">loading...</div></div>
+        </div>
+        <div class="row mt-sm" style="gap:8px;flex-wrap:wrap">
+          <div class="metric card-sm" style="flex:1;min-width:110px"><div class="metric-label">Bitcoin</div><div class="metric-value" id="mk-btc" style="font-size:16px;color:var(--amber)">—</div><div class="metric-sub" id="mk-btc-ch">—</div></div>
+          <div class="metric card-sm" style="flex:1;min-width:110px"><div class="metric-label">Ethereum</div><div class="metric-value" id="mk-eth" style="font-size:16px;color:var(--purple)">—</div><div class="metric-sub" id="mk-eth-ch">—</div></div>
+          <div class="metric card-sm" style="flex:1;min-width:110px"><div class="metric-label">Nasdaq</div><div class="metric-value" id="mk-nasdaq" style="font-size:16px;color:var(--blue)">—</div><div class="metric-sub" id="mk-nasdaq-ch">—</div></div>
+          <div class="metric card-sm" style="flex:1;min-width:110px"><div class="metric-label">USD/INR</div><div class="metric-value" id="mk-usdinr" style="font-size:16px;color:var(--teal)">—</div><div class="metric-sub" id="mk-usdinr-ch">—</div></div>
+        </div>
+        <div class="row mt-sm"><button class="btn btn-sm ghost" onclick="fetchMarkets()"><i class="ti ti-refresh"></i> Refresh</button><span id="mkLastUpdate" style="font-size:11px;color:var(--text3);margin-left:8px"></span></div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-wallet"></i> Monthly budget</div>
+            <div class="form-grid" style="margin-bottom:12px">
+              <div class="form-group"><label>Monthly income (₹)</label><input type="number" id="budgetIncome" placeholder="e.g. 50000" oninput="saveBudget()"></div>
+              <div class="form-group"><label>Savings target (%)</label><input type="number" id="budgetSavingsPct" value="20" min="0" max="100" oninput="saveBudget()"></div>
+            </div>
+            <div class="card-title" style="margin-top:4px"><i class="ti ti-list"></i> Expenses by category</div>
+            <div id="expenseCategories"></div>
+            <button class="btn btn-sm ghost mt-sm" onclick="addExpenseCategory()"><i class="ti ti-plus"></i> Add category</button>
+            <div class="divider"></div>
+            <div id="budgetSummary"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-receipt"></i> Bills &amp; subscriptions</div>
+            <div id="billsList"></div>
+            <div class="form-grid mt-sm">
+              <div class="form-group"><label>Name</label><input type="text" id="billName" placeholder="e.g. Netflix"></div>
+              <div class="form-group"><label>Amount (₹)</label><input type="number" id="billAmount" placeholder="199"></div>
+              <div class="form-group"><label>Due day (1–31)</label><input type="number" id="billDue" placeholder="15" min="1" max="31"></div>
+              <div class="form-group"><label>Frequency</label><select id="billFreq"><option value="monthly">Monthly</option><option value="yearly">Yearly</option><option value="weekly">Weekly</option></select></div>
+            </div>
+            <button class="btn btn-sm primary mt-sm" onclick="addBill()"><i class="ti ti-plus"></i> Add bill</button>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-target"></i> Financial goals</div>
+            <div id="goalsList"></div>
+            <div class="divider"></div>
+            <div class="form-grid">
+              <div class="form-group full"><label>Goal name</label><input type="text" id="goalName" placeholder="e.g. New laptop, Vacation, Emergency fund"></div>
+              <div class="form-group"><label>Target (₹)</label><input type="number" id="goalTarget" placeholder="100000"></div>
+              <div class="form-group"><label>Already saved (₹)</label><input type="number" id="goalSaved" value="0"></div>
+              <div class="form-group"><label>Deadline</label><input type="month" id="goalDeadline"></div>
+              <div class="form-group"><label>Type</label><select id="goalType"><option value="savings">💰 Savings</option><option value="purchase">🛍️ Purchase</option><option value="emergency">🛡️ Emergency fund</option><option value="education">🎓 Education</option><option value="travel">✈️ Travel</option></select></div>
+            </div>
+            <button class="btn btn-sm primary mt-sm" onclick="addGoal()"><i class="ti ti-plus"></i> Add goal</button>
+          </div>
+          <div class="card">
+            <div class="card-title"><i class="ti ti-robot"></i> AI financial advisor</div>
+            <p style="font-size:12px;color:var(--text3);margin-bottom:10px">Personalised tips based on your budget &amp; goals. Not investment advice.</p>
+            <div id="finAIAdvice" style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">Set your budget and goals first to get personalised advice.</div>
+            <div class="ai-input-row" style="margin-bottom:8px">
+              <input type="text" id="finAIInput" placeholder="Ask anything about your finances..." onkeydown="if(event.key==='Enter')askFinanceAI()">
+              <button class="btn btn-sm primary" onclick="askFinanceAI()"><i class="ti ti-send"></i></button>
+            </div>
+            <button class="btn btn-sm ghost" onclick="getAutoFinanceAdvice()"><i class="ti ti-sparkles"></i> Auto-analyse my finances</button>
+          </div>
         </div>
       </div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /main -->
+  </div>
+</div>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────────
-const CLAUDE_API = '/api/claude';
-let blocks = [];
-let notes = [];
-let checklist = {}; // blockId -> {done, deferred}
-let deferredBlocks = [];
-let aiPendingBlocks = [];
-let notifTimers = {};
-let weekHistory = {}; // date string -> {total, done}
-let surveyHistory = [];
-let uploadedFiles = { medical: [], educational: [] };
-let profileSummary = '';
-let aiConversation = [];
-let userName = 'User';
+const API = '/api/claude';
+let blocks=[],notes=[],checklist={},deferredBlocks=[],aiPendingBlocks=[],notifTimers={},weekHistory={},surveyHistory=[],uploadedFiles={medical:[],educational:[]},profileSummary='',aiConversation=[],userName='User',healthGoals={fitness:'maintenance',mental:'none',water:8,calories:2000},wellness={water:0,calories:0},streak=0,deferTarget=null,taskConfirmTarget=null,recognition=null;
+let budget={income:0,savingsPct:20,expenses:[]},bills=[],goals=[];
 
-// ─── STORAGE ────────────────────────────────────────────────────────────────
-function save(key, val) { try { localStorage.setItem('pai_'+key, JSON.stringify(val)); } catch(e){} }
-function load(key, def) { try { const v=localStorage.getItem('pai_'+key); return v?JSON.parse(v):def; } catch(e){return def;} }
+// ─── PRESETS ─────────────────────────────────────────────────────────────────
+const PRESETS = {
+  study:[{name:'Mathematics',icon:'📐'},{name:'Physics',icon:'⚛️'},{name:'Biology',icon:'🧬'},{name:'Chemistry',icon:'🧪'},{name:'History',icon:'📜'},{name:'English',icon:'📖'},{name:'Computer Science',icon:'💻'},{name:'Geography',icon:'🌍'},{name:'Revision',icon:'📝'},{name:'Study session',icon:'📚'}],
+  health:[{name:'Morning walk',icon:'🚶'},{name:'Jogging',icon:'🏃'},{name:'Swimming',icon:'🏊'},{name:'Gym workout',icon:'🏋️'},{name:'Yoga',icon:'🧘'},{name:'Meditation',icon:'🪷'},{name:'Cycling',icon:'🚴'},{name:'Football',icon:'⚽'},{name:'Basketball',icon:'🏀'},{name:'Stretching',icon:'🤸'}],
+  personal:[{name:'Reading',icon:'📕'},{name:'Journaling',icon:'✍️'},{name:'Meal prep',icon:'🍱'},{name:'Family time',icon:'👨‍👩‍👧'},{name:'Social hangout',icon:'🎉'},{name:'Hobby time',icon:'🎨'},{name:'Planning',icon:'🗓️'},{name:'Sleep',icon:'😴'},{name:'Music practice',icon:'🎵'},{name:'Screen-free time',icon:'🌿'}]
+};
 
-function loadAll() {
-  blocks = load('blocks', []);
-  notes = load('notes', []);
-  checklist = load('checklist', {});
-  deferredBlocks = load('deferred', []);
-  weekHistory = load('weekHistory', {});
-  surveyHistory = load('surveys', []);
-  profileSummary = load('profile', '');
-  userName = load('userName', 'User');
-  aiConversation = load('aiConvo', []);
-  uploadedFiles = load('uploads', {medical:[], educational:[]});
-  document.getElementById('userNameInput').value = userName;
-  updateUserName();
-  render();
-  scheduleNotifications();
-  checkWeeklySurveyDue();
+function renderPresets(){
+  ['study','health','personal'].forEach(cat=>{
+    const el=document.getElementById(cat==='study'?'studyPresets':cat==='health'?'healthPresets':'personalPresets');
+    el.innerHTML=PRESETS[cat].map(p=>`<div class="preset-chip" onclick="selectPreset('${p.name}','${cat==='study'?'school':cat==='health'?'health':'personal'}')">${p.icon} ${p.name}</div>`).join('');
+  });
 }
 
-function saveAll() {
-  save('blocks', blocks); save('notes', notes);
-  save('checklist', checklist); save('deferred', deferredBlocks);
-  save('weekHistory', weekHistory); save('surveys', surveyHistory);
-  save('profile', profileSummary); save('userName', userName);
-  save('aiConvo', aiConversation); save('uploads', uploadedFiles);
+function selectPreset(name,type){
+  document.getElementById('blockName').value=name;
+  document.getElementById('blockType').value=type;
+  document.querySelectorAll('.preset-chip').forEach(c=>c.classList.remove('selected'));
+  event.target.classList.add('selected');
+  showPage('add',document.querySelectorAll('.nav-item')[2]);
+  setTimeout(()=>document.getElementById('blockStart').focus(),100);
 }
+
+// ─── STORAGE ─────────────────────────────────────────────────────────────────
+function save(k,v){try{localStorage.setItem('pai_'+k,JSON.stringify(v));}catch(e){}}
+function load(k,d){try{const v=localStorage.getItem('pai_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function loadAll(){
+  blocks=load('blocks',[]);notes=load('notes',[]);checklist=load('checklist',{});deferredBlocks=load('deferred',[]);
+  weekHistory=load('weekHistory',{});surveyHistory=load('surveys',[]);profileSummary=load('profile','');
+  userName=load('userName','User');aiConversation=load('aiConvo',[]);uploadedFiles=load('uploads',{medical:[],educational:[]});
+  healthGoals=load('healthGoals',{fitness:'maintenance',mental:'none',water:8,calories:2000});
+  wellness=load('wellness_'+todayKey(),{water:0,calories:0});
+  streak=load('streak',0);
+  budget=load('budget',{income:0,savingsPct:20,expenses:[{name:'Rent/Housing',amount:0},{name:'Food & Groceries',amount:0},{name:'Transport',amount:0},{name:'Entertainment',amount:0},{name:'Utilities',amount:0}]});
+  bills=load('bills',[]);goals=load('goals',[]);
+  document.getElementById('budgetIncome').value=budget.income||'';
+  document.getElementById('budgetSavingsPct').value=budget.savingsPct||20;
+  document.getElementById('userNameInput').value=userName;
+  document.getElementById('waterGoalInput').value=healthGoals.water;
+  document.getElementById('calGoalInput').value=healthGoals.calories;
+  document.getElementById('fitnessGoal').value=healthGoals.fitness;
+  document.getElementById('mentalGoal').value=healthGoals.mental;
+  updateUserName();render();scheduleNotifications();renderPresets();
+  if(aiConversation.length)renderAIMessages();
+  renderUploads();renderBudget();renderBills();renderGoals();
+  fetchMarkets();setInterval(fetchMarkets,60000);
+}
+function saveAll(){save('blocks',blocks);save('notes',notes);save('checklist',checklist);save('deferred',deferredBlocks);save('weekHistory',weekHistory);save('surveys',surveyHistory);save('profile',profileSummary);save('userName',userName);save('aiConvo',aiConversation);save('uploads',uploadedFiles);save('healthGoals',healthGoals);save('wellness_'+todayKey(),wellness);save('streak',streak);save('budget',budget);save('bills',bills);save('goals',goals);}
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
-function fmt(t) { const [h,m]=t.split(':').map(Number); const ap=h>=12?'pm':'am'; return `${h%12||12}:${m.toString().padStart(2,'0')} ${ap}`; }
-function mins(t) { const [h,m]=t.split(':').map(Number); return h*60+m; }
-function nowMins() { const n=new Date(); return n.getHours()*60+n.getMinutes(); }
-function todayKey() { return new Date().toISOString().slice(0,10); }
-function blockId(b) { return b.name+b.start; }
-const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const TYPES = {school:'var(--blue)',work:'var(--green)',personal:'var(--amber)',health:'var(--teal)'};
+function fmt(t){const[h,m]=t.split(':').map(Number);const ap=h>=12?'pm':'am';return`${h%12||12}:${m.toString().padStart(2,'0')} ${ap}`;}
+function mins(t){const[h,m]=t.split(':').map(Number);return h*60+m;}
+function nowMins(){const n=new Date();return n.getHours()*60+n.getMinutes();}
+function todayKey(){return new Date().toISOString().slice(0,10);}
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 // ─── NAVIGATION ──────────────────────────────────────────────────────────────
-const PAGE_TITLES = {dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',notifications:'Notifications',reports:'Medical & Education'};
-function showPage(name, el) {
+const PAGE_TITLES={dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',health:'Health & wellness',finance:'Finance',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',notifications:'Notifications',reports:'Medical & Education'};
+function showPage(name,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
-  if(el) el.classList.add('active');
-  document.getElementById('topbarTitle').textContent = PAGE_TITLES[name]||name;
+  if(el)el.classList.add('active');
+  document.getElementById('topbarTitle').textContent=PAGE_TITLES[name]||name;
   render();
 }
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 
-// ─── RENDER ───────────────────────────────────────────────────────────────────
-function render() {
-  renderDashboard();
-  renderChecklist();
-  renderNotifList();
-  renderTimeline();
-  renderNotes();
-  renderWeekly();
-  updateBadge();
-}
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function render(){renderDashboard();renderChecklist();renderNotifList();renderTimeline();renderNotes();renderWeekly();renderWellness();updateBadge();}
 
-function renderDashboard() {
-  const sorted = [...blocks].sort((a,b)=>mins(a.start)-mins(b.start));
-  const now = nowMins();
-  const cl = checklist;
+function renderDashboard(){
+  const sorted=[...blocks].sort((a,b)=>mins(a.start)-mins(b.start));
+  const now=nowMins();const cl=checklist;
   let school=0,work=0,personal=0,health=0,done=0;
-  blocks.forEach(b=>{
-    const dur=(mins(b.end)-mins(b.start))/60;
-    if(b.type==='school') school+=dur;
-    else if(b.type==='work') work+=dur;
-    else if(b.type==='personal') personal+=dur;
-    else if(b.type==='health') health+=dur;
-    if(cl[blockId(b)]?.done) done++;
-  });
-  const total = blocks.length;
-  const hours = (school+work+personal+health).toFixed(1);
-  const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('m-total').textContent = total;
-  document.getElementById('m-done').textContent = done;
-  document.getElementById('m-hours').textContent = hours+'h';
-  document.getElementById('m-pct').textContent = pct+'%';
-
-  // schedule list
-  const sl = document.getElementById('dashSchedule');
-  if(!sorted.length){ sl.innerHTML='<div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div>'; }
-  else sl.innerHTML = sorted.map((b,i)=>{
-    const isNow = now>=mins(b.start)&&now<mins(b.end);
-    const isDone = cl[blockId(b)]?.done;
-    return `<div class="block-item ${b.type} ${isNow?'active-now':''}">
-      <span class="block-time">${fmt(b.start)} – ${fmt(b.end)}</span>
-      <span class="block-name" style="${isDone?'text-decoration:line-through;opacity:0.5':''}">${b.name}</span>
-      ${isNow?'<span class="now-badge">Now</span>':''}
-      <span class="tag tag-${b.type}">${b.type}</span>
-      <button class="icon-btn" onclick="deleteBlock(${i})" title="Delete"><i class="ti ti-trash"></i></button>
-    </div>`;
-  }).join('');
-
-  // up next
-  const up = sorted.find(b=>mins(b.start)>now);
-  const upEl = document.getElementById('upNext');
-  if(up){ const m=mins(up.start)-now; upEl.innerHTML=`<div class="block-item ${up.type}"><span class="block-time">${fmt(up.start)}</span><span class="block-name">${up.name}</span><span class="text-sm text-muted">in ${m} min</span><span class="tag tag-${up.type}">${up.type}</span></div>`; }
-  else upEl.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-check"></i><p>All done for today!</p></div>';
-
-  // breakdown
-  const br = document.getElementById('breakdown');
-  if(!total){ br.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-chart-bar"></i><p>No data.</p></div>'; return; }
-  const totals = {school,work,personal,health};
-  const totalH = school+work+personal+health||1;
-  const colors = {school:'var(--blue)',work:'var(--green)',personal:'var(--amber)',health:'var(--teal)'};
-  br.innerHTML = Object.entries(totals).filter(([,v])=>v>0).map(([type,h])=>`
-    <div style="margin-bottom:12px">
-      <div class="row between text-sm" style="margin-bottom:4px"><span style="text-transform:capitalize">${type}</span><span style="font-weight:500">${h.toFixed(1)}h</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(h/totalH*100)}%;background:${colors[type]}"></div></div>
-    </div>`).join('');
-
-  // track today
-  const td = todayKey();
-  weekHistory[td] = {total, done};
-  save('weekHistory', weekHistory);
+  blocks.forEach(b=>{const dur=(mins(b.end)-mins(b.start))/60;if(b.type==='school')school+=dur;else if(b.type==='work')work+=dur;else if(b.type==='personal')personal+=dur;else if(b.type==='health')health+=dur;if(cl[blockId(b)]?.done)done++;});
+  const total=blocks.length;const pct=total?Math.round(done/total*100):0;
+  document.getElementById('m-total').textContent=total;document.getElementById('m-done').textContent=done;
+  document.getElementById('m-hours').textContent=((school+work+personal+health).toFixed(1))+'h';
+  document.getElementById('m-pct').textContent=pct+'%';document.getElementById('m-streak').textContent=streak;
+  const sl=document.getElementById('dashSchedule');
+  if(!sorted.length){sl.innerHTML='<div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div>';}
+  else sl.innerHTML=sorted.map((b,i)=>{const isNow=now>=mins(b.start)&&now<mins(b.end);const isDone=cl[blockId(b)]?.done;return`<div class="block-item ${b.type} ${isNow?'active-now':''}"><span class="block-time">${fmt(b.start)} – ${fmt(b.end)}</span><span class="block-name" style="${isDone?'text-decoration:line-through;opacity:0.5':''}">${b.name}</span>${isNow?'<span class="now-badge">Now</span>':''}<span class="tag tag-${b.type}">${b.type}</span><button class="icon-btn" onclick="deleteBlock(${i})"><i class="ti ti-trash"></i></button></div>`;}).join('');
+  const up=sorted.find(b=>mins(b.start)>now);
+  const upEl=document.getElementById('upNext');
+  if(up){const m=mins(up.start)-now;upEl.innerHTML=`<div class="block-item ${up.type}"><span class="block-time">${fmt(up.start)}</span><span class="block-name">${up.name}</span><span class="text-sm text-muted">in ${m} min</span><span class="tag tag-${up.type}">${up.type}</span></div>`;}
+  else upEl.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-check"></i><p>All done!</p></div>';
+  const br=document.getElementById('breakdown');
+  if(!total){br.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-chart-bar"></i><p>No data.</p></div>';return;}
+  const totals={school,work,personal,health};const totalH=school+work+personal+health||1;
+  const colors={school:'var(--blue)',work:'var(--green)',personal:'var(--amber)',health:'var(--teal)'};
+  br.innerHTML=Object.entries(totals).filter(([,v])=>v>0).map(([type,h])=>`<div style="margin-bottom:12px"><div class="row between text-sm" style="margin-bottom:4px"><span style="text-transform:capitalize">${type}</span><span style="font-weight:500">${h.toFixed(1)}h</span></div><div class="progress-bar"><div class="progress-fill" style="width:${Math.round(h/totalH*100)}%;background:${colors[type]}"></div></div></div>`).join('');
+  const td=todayKey();weekHistory[td]={total,done};save('weekHistory',weekHistory);
+  // update streak
+  if(total>0&&done===total){streak=load('streak',0)+1;save('streak',streak);}
+  document.getElementById('streakNum').textContent=streak;
 }
 
-function renderChecklist() {
-  const sorted = [...blocks].sort((a,b)=>mins(a.start)-mins(b.start));
-  const cl = checklist;
-  const total = sorted.length;
-  const done = sorted.filter(b=>cl[blockId(b)]?.done).length;
-  document.getElementById('checklistProgress').textContent = `${done} / ${total} done`;
-  document.getElementById('checklistProgressBar').style.width = total?`${Math.round(done/total*100)}%`:'0%';
+function blockId(b){return b.name+b.start;}
 
-  const el = document.getElementById('checklistItems');
-  if(!sorted.length){ el.innerHTML='<div class="empty"><i class="ti ti-list-check"></i><p>Add blocks to see your checklist.</p></div>'; }
-  else el.innerHTML = sorted.map((b,i)=>{
-    const id = blockId(b);
-    const isDone = cl[id]?.done||false;
-    const isDeferred = cl[id]?.deferred||false;
-    return `<div class="checklist-item ${isDone?'done':''}">
-      <input type="checkbox" ${isDone?'checked':''} onchange="toggleDone('${id}')">
-      <label class="check-label" onclick="toggleDone('${id}')"><span class="block-name">${b.name}</span><span class="block-time" style="margin-left:8px">${fmt(b.start)} – ${fmt(b.end)}</span></label>
-      <span class="tag tag-${b.type}">${b.type}</span>
-      ${!isDone&&!isDeferred?`<button class="defer-btn" onclick="deferTask('${id}',${i})">Do later ↓</button>`:''}
-      ${isDeferred?'<span class="tag" style="background:rgba(167,139,250,0.1);color:var(--purple)">rescheduled</span>':''}
-    </div>`;
-  }).join('');
-
-  // deferred
-  const dCard = document.getElementById('deferredCard');
-  const dEl = document.getElementById('deferredItems');
-  if(deferredBlocks.length){ dCard.style.display='block'; dEl.innerHTML=deferredBlocks.map((b,i)=>`<div class="block-item ${b.type}"><span class="block-time">${fmt(b.start)} – ${fmt(b.end)}</span><span class="block-name">${b.name} <span style="color:var(--text3);font-size:11px">(deferred)</span></span><span class="tag tag-${b.type}">${b.type}</span><button class="icon-btn" onclick="removeDeferredBlock(${i})"><i class="ti ti-x"></i></button></div>`).join(''); }
+function renderChecklist(){
+  const sorted=[...blocks].sort((a,b)=>mins(a.start)-mins(b.start));
+  const cl=checklist;const total=sorted.length;const done=sorted.filter(b=>cl[blockId(b)]?.done).length;
+  document.getElementById('checklistProgress').textContent=`${done} / ${total} done`;
+  document.getElementById('checklistProgressBar').style.width=total?`${Math.round(done/total*100)}%`:'0%';
+  const el=document.getElementById('checklistItems');
+  if(!sorted.length){el.innerHTML='<div class="empty"><i class="ti ti-list-check"></i><p>Add blocks to see your checklist.</p></div>';}
+  else el.innerHTML=sorted.map((b,i)=>{const id=blockId(b);const isDone=cl[id]?.done||false;const isDeferred=cl[id]?.deferred||false;
+    return`<div class="checklist-item ${isDone?'done':''}"><input type="checkbox" ${isDone?'checked':''} onchange="toggleDone('${id}')"><label class="check-label" onclick="toggleDone('${id}')"><span class="block-name">${b.name}</span><span class="block-time" style="margin-left:8px">${fmt(b.start)} – ${fmt(b.end)}</span></label><span class="tag tag-${b.type}">${b.type}</span>${!isDone&&!isDeferred?`<button class="defer-btn" onclick="deferTask('${id}',${i})">Do later ↓</button>`:''}${isDeferred?'<span class="tag" style="background:rgba(167,139,250,0.1);color:var(--purple)">rescheduled</span>':''}</div>`;}).join('');
+  const dCard=document.getElementById('deferredCard');const dEl=document.getElementById('deferredItems');
+  if(deferredBlocks.length){dCard.style.display='block';dEl.innerHTML=deferredBlocks.map((b,i)=>`<div class="block-item ${b.type}"><span class="block-time">${fmt(b.start)} – ${fmt(b.end)}</span><span class="block-name">${b.name} <span style="color:var(--text3);font-size:11px">(deferred)</span></span><button class="icon-btn" onclick="removeDeferredBlock(${i})"><i class="ti ti-x"></i></button></div>`).join('');}
   else dCard.style.display='none';
-
   updateBadge();
 }
 
-function updateBadge() {
-  const pending = blocks.filter(b=>!checklist[blockId(b)]?.done).length;
-  document.getElementById('badgePending').textContent = pending;
+function updateBadge(){document.getElementById('badgePending').textContent=blocks.filter(b=>!checklist[blockId(b)]?.done).length;}
+
+function renderWellness(){
+  const wg=healthGoals.water||8;const cg=healthGoals.calories||2000;
+  document.getElementById('waterGoal').textContent=wg;document.getElementById('calGoal').textContent=cg;
+  document.getElementById('waterCount').textContent=wellness.water||0;document.getElementById('calCount').textContent=wellness.calories||0;
+  document.getElementById('waterBar').style.width=Math.min(100,Math.round((wellness.water||0)/wg*100))+'%';
+  document.getElementById('calBar').style.width=Math.min(100,Math.round((wellness.calories||0)/cg*100))+'%';
+  document.getElementById('waterDisplay').textContent=(wellness.water||0)+' glasses';
+  document.getElementById('calDisplay').textContent=(wellness.calories||0)+' kcal';
+  document.getElementById('waterBarH').style.width=Math.min(100,Math.round((wellness.water||0)/wg*100))+'%';
+  document.getElementById('calBarH').style.width=Math.min(100,Math.round((wellness.calories||0)/cg*100))+'%';
 }
 
-function renderNotifList() {
-  const el = document.getElementById('notifList');
-  if(!blocks.length){ el.innerHTML='<div class="empty"><i class="ti ti-bell-off"></i><p>Add blocks to configure timing.</p></div>'; return; }
-  el.innerHTML = blocks.map((b,i)=>`
-    <div class="row between" style="padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px">
-      <div><div style="font-size:14px;font-weight:500">${b.name}</div><div class="text-sm text-muted">${fmt(b.start)} – ${fmt(b.end)} · ${b.type}</div></div>
-      <div class="row" style="gap:8px;align-items:center">
-        <input type="number" value="${b.notifMins||10}" min="1" max="60" style="width:60px" onchange="blocks[${i}].notifMins=parseInt(this.value)||10;saveAll();scheduleNotifications()">
-        <span class="text-sm text-muted">min before</span>
-      </div>
-    </div>`).join('');
+function renderNotifList(){
+  const el=document.getElementById('notifList');
+  if(!blocks.length){el.innerHTML='<div class="empty"><i class="ti ti-bell-off"></i><p>Add blocks to configure.</p></div>';return;}
+  el.innerHTML=blocks.map((b,i)=>`<div class="row between" style="padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px"><div><div style="font-weight:500">${b.name}</div><div class="text-sm text-muted">${fmt(b.start)} – ${fmt(b.end)}</div></div><div class="row" style="gap:8px"><input type="number" value="${b.notifMins||10}" min="1" max="60" style="width:60px" onchange="blocks[${i}].notifMins=parseInt(this.value)||10;saveAll();scheduleNotifications()"><span class="text-sm text-muted">min before</span></div></div>`).join('');
 }
 
-function renderTimeline() {
+function renderTimeline(){
   const sorted=[...blocks].sort((a,b)=>mins(a.start)-mins(b.start));
   const tl=document.getElementById('timelineList');
-  if(!sorted.length){ tl.innerHTML='<div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div>'; }
-  else tl.innerHTML=sorted.map(b=>{
-    const note=notes.find(n=>n.blockName===b.name);
-    return `<div class="tl-item"><div class="tl-dot ${b.type}"></div><div class="tl-time">${fmt(b.start)} – ${fmt(b.end)}</div><div class="tl-name">${b.name}</div>${note?`<div class="tl-note">${note.text}</div>`:''}</div>`;
-  }).join('');
-
-  const crEl=document.getElementById('crossRefList');
-  const linked=notes.filter(n=>n.blockName);
-  if(!linked.length){ crEl.innerHTML='<div class="empty"><i class="ti ti-link"></i><p>No linked notes yet.</p></div>'; }
-  else crEl.innerHTML=linked.map((n,i)=>`<div style="padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px"><div class="row between"><div class="text-sm" style="color:var(--accent);font-weight:600">${n.blockName}</div></div><div style="font-size:13px;margin-top:4px">${n.text}</div></div>`).join('');
+  if(!sorted.length){tl.innerHTML='<div class="empty"><i class="ti ti-calendar-off"></i><p>No blocks yet.</p></div>';}
+  else tl.innerHTML=sorted.map(b=>{const note=notes.find(n=>n.blockName===b.name);return`<div class="tl-item"><div class="tl-dot ${b.type}"></div><div class="tl-time">${fmt(b.start)} – ${fmt(b.end)}</div><div class="tl-name">${b.name}</div>${note?`<div class="tl-note">${note.text}</div>`:''}</div>`;}).join('');
+  const crEl=document.getElementById('crossRefList');const linked=notes.filter(n=>n.blockName);
+  if(!linked.length){crEl.innerHTML='<div class="empty"><i class="ti ti-link"></i><p>No linked notes yet.</p></div>';}
+  else crEl.innerHTML=linked.map(n=>`<div style="padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px"><div class="text-sm text-accent" style="font-weight:600">${n.blockName}</div><div style="font-size:13px;margin-top:4px">${n.text}</div></div>`).join('');
 }
 
-function renderNotes() {
-  const sel=document.getElementById('noteBlock');
-  sel.innerHTML='<option value="">— none —</option>'+blocks.map(b=>`<option value="${b.name}">${b.name}</option>`).join('');
+function renderNotes(){
+  const sel=document.getElementById('noteBlock');sel.innerHTML='<option value="">— none —</option>'+blocks.map(b=>`<option value="${b.name}">${b.name}</option>`).join('');
   const el=document.getElementById('notesList');
-  if(!notes.length){ el.innerHTML='<div class="empty"><i class="ti ti-notes"></i><p>No notes yet.</p></div>'; return; }
-  el.innerHTML=notes.map((n,i)=>`<div style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px">${n.blockName?`<div class="text-sm" style="color:var(--accent);margin-bottom:4px">↗ ${n.blockName}</div>`:''}<div style="font-size:13.5px;line-height:1.6">${n.text}</div><button class="icon-btn btn-sm" style="margin-top:8px" onclick="deleteNote(${i})"><i class="ti ti-trash"></i></button></div>`).join('');
+  if(!notes.length){el.innerHTML='<div class="empty"><i class="ti ti-notes"></i><p>No notes yet.</p></div>';return;}
+  el.innerHTML=notes.map((n,i)=>`<div style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px">${n.blockName?`<div class="text-sm text-accent" style="margin-bottom:4px">↗ ${n.blockName}</div>`:''}<div style="font-size:13.5px;line-height:1.6">${n.text}</div><button class="icon-btn btn-sm" style="margin-top:8px" onclick="deleteNote(${i})"><i class="ti ti-trash"></i></button></div>`).join('');
 }
 
-function renderWeekly() {
-  const today = new Date();
+function renderWeekly(){
+  const today=new Date();const days=[];for(let i=6;i>=0;i--){const d=new Date(today);d.setDate(today.getDate()-i);days.push(d);}
   const wg=document.getElementById('weekGrid');
-  const days=[];
-  for(let i=6;i>=0;i--){ const d=new Date(today); d.setDate(today.getDate()-i); days.push(d); }
-  wg.innerHTML=days.map(d=>{
-    const key=d.toISOString().slice(0,10);
-    const hist=weekHistory[key]||{total:0,done:0};
-    const pct=hist.total?Math.round(hist.done/hist.total*100):0;
-    const isToday=key===todayKey();
-    return `<div class="day-col ${isToday?'today':''}"><div class="day-name">${DAYS[d.getDay()]}</div><div class="day-bar"><div class="day-bar-fill" style="height:${pct}%"></div></div><div class="day-pct">${pct}%</div></div>`;
-  }).join('');
-  const allPcts=days.map(d=>{ const k=d.toISOString().slice(0,10); const h=weekHistory[k]||{total:0,done:0}; return h.total?Math.round(h.done/h.total*100):0; });
-  const avg=Math.round(allPcts.reduce((a,b)=>a+b,0)/7);
-  const bestIdx=allPcts.indexOf(Math.max(...allPcts));
-  const totalH=Object.values(weekHistory).reduce((a,v)=>a+(v.total||0),0);
-  document.getElementById('wk-avg').textContent=avg+'%';
-  document.getElementById('wk-best').textContent=DAYS[days[bestIdx]?.getDay()]||'-';
-  document.getElementById('wk-hours').textContent=totalH+'h';
+  wg.innerHTML=days.map(d=>{const key=d.toISOString().slice(0,10);const hist=weekHistory[key]||{total:0,done:0};const pct=hist.total?Math.round(hist.done/hist.total*100):0;const isToday=key===todayKey();return`<div class="day-col ${isToday?'today':''}"><div class="day-name">${DAYS[d.getDay()]}</div><div class="day-bar"><div class="day-bar-fill" style="height:${pct}%"></div></div><div class="day-pct">${pct}%</div></div>`;}).join('');
+  const allPcts=days.map(d=>{const k=d.toISOString().slice(0,10);const h=weekHistory[k]||{total:0,done:0};return h.total?Math.round(h.done/h.total*100):0;});
+  const avg=Math.round(allPcts.reduce((a,b)=>a+b,0)/7);const bestIdx=allPcts.indexOf(Math.max(...allPcts));const totalBlocks=Object.values(weekHistory).reduce((a,v)=>a+(v.total||0),0);
+  document.getElementById('wk-avg').textContent=avg+'%';document.getElementById('wk-best').textContent=DAYS[days[bestIdx]?.getDay()]||'-';document.getElementById('wk-hours').textContent=totalBlocks;
+  document.getElementById('weeklyAvgScore').textContent=avg+'%';document.getElementById('bestDayScore').textContent=Math.max(...allPcts)+'%';
 }
 
-// ─── BLOCKS ──────────────────────────────────────────────────────────────────
-function addBlock() {
-  const name=document.getElementById('blockName').value.trim();
-  const type=document.getElementById('blockType').value;
-  const start=document.getElementById('blockStart').value;
-  const end=document.getElementById('blockEnd').value;
-  const n=document.getElementById('blockNotes').value.trim();
-  const notifMins=parseInt(document.getElementById('blockNotifMins').value)||10;
+// ─── BLOCKS ───────────────────────────────────────────────────────────────────
+function addBlock(){
+  const name=document.getElementById('blockName').value.trim();const type=document.getElementById('blockType').value;
+  const start=document.getElementById('blockStart').value;const end=document.getElementById('blockEnd').value;
+  const n=document.getElementById('blockNotes').value.trim();const notifMins=parseInt(document.getElementById('blockNotifMins').value)||10;
   const priority=document.getElementById('blockPriority').value;
-  if(!name||!start||!end){ toast('Missing fields','Fill in name, start and end time.','warning'); return; }
-  if(mins(start)>=mins(end)){ toast('Invalid time','End must be after start.','warning'); return; }
-  const b={name,type,start,end,notes:n,notifMins,priority};
-  blocks.push(b);
-  saveAll(); render(); scheduleNotifications();
-  toast('Block added',`${name} added to your schedule.`,'success');
-  clearBlockForm();
+  if(!name||!start||!end){toast('Missing fields','Fill in name, start and end time.','warning');return;}
+  if(mins(start)>=mins(end)){toast('Invalid time','End must be after start.','warning');return;}
+  blocks.push({name,type,start,end,notes:n,notifMins,priority});
+  saveAll();render();scheduleNotifications();toast('Block added',`${name} added!`,'success');clearBlockForm();
 }
+function clearBlockForm(){document.getElementById('blockName').value='';document.getElementById('blockNotes').value='';}
+function deleteBlock(i){blocks.splice(i,1);saveAll();render();scheduleNotifications();}
 
-function clearBlockForm(){ document.getElementById('blockName').value=''; document.getElementById('blockNotes').value=''; }
-function deleteBlock(i){ blocks.splice(i,1); saveAll(); render(); scheduleNotifications(); }
+// ─── CHECKLIST ────────────────────────────────────────────────────────────────
+function toggleDone(id){checklist[id]={...checklist[id]||{},done:!checklist[id]?.done};saveAll();renderChecklist();renderDashboard();}
 
-// ─── CHECKLIST ───────────────────────────────────────────────────────────────
-function toggleDone(id) {
-  checklist[id]={...checklist[id]||{}, done:!checklist[id]?.done};
-  saveAll(); renderChecklist(); renderDashboard();
+function deferTask(id,idx){
+  deferTarget={id,idx};const b=blocks[idx];
+  const sorted=[...blocks].sort((a,b2)=>mins(a.start)-mins(b2.start));const now=nowMins();
+  let slot=Math.max(now+5,mins(b.end)+5);
+  for(const bl of sorted){if(mins(bl.start)>=slot+30)break;if(mins(bl.end)>slot)slot=mins(bl.end)+5;}
+  const sh=Math.floor(slot/60),sm=slot%60;const dur=mins(b.end)-mins(b.start);const eh=Math.floor((slot+dur)/60),em=(slot+dur)%60;
+  const newStart=`${sh.toString().padStart(2,'0')}:${sm.toString().padStart(2,'0')}`;const newEnd=`${eh.toString().padStart(2,'0')}:${em.toString().padStart(2,'0')}`;
+  document.getElementById('deferModalSub').textContent=`Rescheduling "${b.name}"`;
+  document.getElementById('deferSuggestion').innerHTML=`<div class="block-item ${b.type}" style="margin:0"><span class="block-time">${fmt(newStart)} – ${fmt(newEnd)}</span><span class="block-name">${b.name}</span></div>`;
+  deferTarget.newStart=newStart;deferTarget.newEnd=newEnd;openModal('deferModal');
 }
-
-let deferTarget = null;
-function deferTask(id, idx) {
-  deferTarget = {id, idx};
-  const b = blocks[idx];
-  // Find a free gap
-  const sorted=[...blocks].sort((a,b2)=>mins(a.start)-mins(b2.start));
-  const now=nowMins();
-  let slot=Math.max(now+5, mins(b.end)+5);
-  // Find a gap that doesn't overlap
-  for(const bl of sorted){
-    if(mins(bl.start)>=slot+30) break;
-    if(mins(bl.end)>slot) slot=mins(bl.end)+5;
-  }
-  const sh=Math.floor(slot/60), sm=slot%60;
-  const dur=mins(b.end)-mins(b.start);
-  const eh=Math.floor((slot+dur)/60), em=(slot+dur)%60;
-  const newStart=`${sh.toString().padStart(2,'0')}:${sm.toString().padStart(2,'0')}`;
-  const newEnd=`${eh.toString().padStart(2,'0')}:${em.toString().padStart(2,'0')}`;
-  document.getElementById('deferModalSub').textContent = `Rescheduling "${b.name}"`;
-  document.getElementById('deferSuggestion').innerHTML=`<div class="block-item ${b.type}" style="margin:0"><span class="block-time">${fmt(newStart)} – ${fmt(newEnd)}</span><span class="block-name">${b.name}</span><span class="tag tag-${b.type}">${b.type}</span></div>`;
-  deferTarget.newStart=newStart; deferTarget.newEnd=newEnd;
-  document.getElementById('deferModal').classList.add('open');
+function confirmDefer(){
+  if(!deferTarget)return;const{id,idx,newStart,newEnd}=deferTarget;
+  checklist[id]={...checklist[id]||{},deferred:true};deferredBlocks.push({...blocks[idx],start:newStart,end:newEnd});
+  saveAll();render();closeModal('deferModal');deferTarget=null;toast('Rescheduled','AI found a free slot.','success');
 }
-
-function confirmDefer() {
-  if(!deferTarget) return;
-  const {id,idx,newStart,newEnd}=deferTarget;
-  checklist[id]={...checklist[id]||{},deferred:true};
-  const b=blocks[idx];
-  deferredBlocks.push({...b,start:newStart,end:newEnd});
-  saveAll(); render(); closeModal('deferModal'); deferTarget=null;
-  toast('Task rescheduled','AI found a free slot and moved the task.','success');
-}
-
-function removeDeferredBlock(i){ deferredBlocks.splice(i,1); saveAll(); renderChecklist(); }
+function removeDeferredBlock(i){deferredBlocks.splice(i,1);saveAll();renderChecklist();}
 
 // ─── NOTES ───────────────────────────────────────────────────────────────────
-function addNote(){ const text=document.getElementById('noteText').value.trim(); const blockName=document.getElementById('noteBlock').value; if(!text)return; notes.push({text,blockName}); saveAll(); render(); document.getElementById('noteText').value=''; toast('Saved','Note saved successfully.','success'); }
-function deleteNote(i){ notes.splice(i,1); saveAll(); renderNotes(); }
+function addNote(){const text=document.getElementById('noteText').value.trim();const blockName=document.getElementById('noteBlock').value;if(!text)return;notes.push({text,blockName});saveAll();render();document.getElementById('noteText').value='';toast('Saved','Note saved.','success');}
+function deleteNote(i){notes.splice(i,1);saveAll();renderNotes();}
+
+// ─── WELLNESS ─────────────────────────────────────────────────────────────────
+function addWater(){wellness.water=(wellness.water||0)+1;saveAll();renderWellness();toast('💧 Water logged',`${wellness.water} / ${healthGoals.water} glasses`,'success');}
+function addCalories(){const amt=prompt('Calories to add (kcal):');if(!amt||isNaN(amt))return;wellness.calories=(wellness.calories||0)+parseInt(amt);saveAll();renderWellness();toast('🔥 Calories logged',`${wellness.calories} / ${healthGoals.calories} kcal`,'success');}
+function saveHealthGoals(){healthGoals.fitness=document.getElementById('fitnessGoal').value;healthGoals.mental=document.getElementById('mentalGoal').value;healthGoals.water=parseInt(document.getElementById('waterGoalInput').value)||8;healthGoals.calories=parseInt(document.getElementById('calGoalInput').value)||2000;saveAll();renderWellness();}
+
+async function getHealthRecs(){
+  const el=document.getElementById('healthRecs');el.innerHTML='<div class="spinner"></div> Generating...';
+  try{
+    const res=await callClaude([{role:'user',content:`Fitness goal: ${healthGoals.fitness}, Mental focus: ${healthGoals.mental}. Give 4 specific activity recommendations in 3 sentences max. Be practical and concise.`}],150);
+    el.textContent=res;
+  }catch(e){el.textContent='Could not generate recommendations.';}
+}
 
 // ─── NOTIFICATIONS ────────────────────────────────────────────────────────────
-function scheduleNotifications() {
-  Object.values(notifTimers).forEach(clearTimeout); notifTimers={};
+function scheduleNotifications(){
+  Object.values(notifTimers).forEach(clearTimeout);notifTimers={};
   const banner=document.getElementById('bannerEnabled').checked;
   const push=document.getElementById('pushEnabled').checked;
+  const confirm=document.getElementById('confirmEnabled').checked;
   blocks.forEach(b=>{
-    const endM=mins(b.end), warnM=endM-(b.notifMins||10), nowM=nowMins();
-    const msWarn=(warnM-nowM)*60000, msEnd=(endM-nowM)*60000;
-    if(msWarn>0) notifTimers['w'+b.name]=setTimeout(()=>{ if(banner)toast(`⏰ ${b.name}`,`Ending in ${b.notifMins} minutes!`,'warning'); if(push&&Notification.permission==='granted')new Notification(`⏰ ${b.name}`,{body:`Ending in ${b.notifMins} minutes!`}); },msWarn);
-    if(msEnd>0) notifTimers['e'+b.name]=setTimeout(()=>{ if(banner)toast(`✅ ${b.name}`,'Block ended.','success'); if(push&&Notification.permission==='granted')new Notification(`✅ ${b.name}`,{body:'Block ended.'}); render(); },msEnd);
+    const endM=mins(b.end),warnM=endM-(b.notifMins||10),nowM=nowMins();
+    const msWarn=(warnM-nowM)*60000,msEnd=(endM-nowM)*60000;
+    if(msWarn>0)notifTimers['w'+b.name]=setTimeout(()=>{if(banner)toast(`⏰ ${b.name}`,`Ending in ${b.notifMins} minutes!`,'warning');if(push&&Notification.permission==='granted')new Notification(`⏰ ${b.name}`,{body:`Ending in ${b.notifMins} minutes!`});},msWarn);
+    if(msEnd>0)notifTimers['e'+b.name]=setTimeout(()=>{if(banner)toast(`✅ ${b.name}`,'Block ended.','success');if(push&&Notification.permission==='granted')new Notification(`✅ ${b.name}`,{body:'Block ended.'});if(confirm)showTaskConfirm(b);render();},msEnd);
   });
 }
+function togglePush(){if(document.getElementById('pushEnabled').checked){if(Notification.permission==='default')Notification.requestPermission().then(p=>{if(p!=='granted'){document.getElementById('pushEnabled').checked=false;toast('Permission denied','Enable in browser settings.','warning');}else scheduleNotifications();});else if(Notification.permission==='denied'){document.getElementById('pushEnabled').checked=false;toast('Permission denied','Enable in browser settings.','warning');}}}
 
-function togglePush() {
-  if(document.getElementById('pushEnabled').checked){
-    if(Notification.permission==='default') Notification.requestPermission().then(p=>{ if(p!=='granted'){ document.getElementById('pushEnabled').checked=false; toast('Permission denied','Enable in browser settings.','warning'); } else scheduleNotifications(); });
-    else if(Notification.permission==='denied'){ document.getElementById('pushEnabled').checked=false; toast('Permission denied','Enable in browser settings.','warning'); }
-  }
+// ─── TASK CONFIRM ─────────────────────────────────────────────────────────────
+function showTaskConfirm(b){taskConfirmTarget=b;document.getElementById('taskConfirmTitle').textContent=`Did you complete "${b.name}"?`;document.getElementById('taskConfirmSub').textContent=`${fmt(b.start)} – ${fmt(b.end)}`;openModal('taskConfirmModal');}
+function confirmTaskDone(done){
+  if(!taskConfirmTarget)return;
+  const id=blockId(taskConfirmTarget);
+  if(done){checklist[id]={...checklist[id]||{},done:true};saveAll();render();toast('Great job! 🎉',`${taskConfirmTarget.name} marked complete.`,'success');}
+  else{const idx=blocks.findIndex(b=>blockId(b)===id);if(idx>=0)deferTask(id,idx);}
+  closeModal('taskConfirmModal');taskConfirmTarget=null;
 }
 
-// ─── AI SCHEDULER ────────────────────────────────────────────────────────────
-async function sendAI() {
-  const inp=document.getElementById('aiInput');
-  const msg=inp.value.trim(); if(!msg) return;
-  inp.value='';
-  aiConversation.push({role:'user',content:msg});
-  save('aiConvo',aiConversation);
-  renderAIMessages();
-  document.getElementById('aiSendBtn').innerHTML='<div class="spinner"></div>';
-  document.getElementById('aiSendBtn').disabled=true;
+// ─── MOTIVATE ME ──────────────────────────────────────────────────────────────
+function openMotivate(){
+  openModal('motivateModal');document.getElementById('motivateResponse').style.display='none';
+  document.getElementById('motivateLoading').style.display='flex';document.getElementById('remotivatebtn').style.display='none';
+  const nextBlock=blocks.sort((a,b)=>mins(a.start)-mins(b.start)).find(b=>mins(b.start)>nowMins());
+  document.getElementById('motivateContext').textContent=nextBlock?`Your next task: ${nextBlock.name} at ${fmt(nextBlock.start)}`:'Ready to boost your productivity?';
+  runMotivate();
+}
+async function runMotivate(){
+  document.getElementById('motivateLoading').style.display='flex';document.getElementById('motivateResponse').style.display='none';
+  const pending=blocks.filter(b=>!checklist[blockId(b)]?.done);const done=blocks.filter(b=>checklist[blockId(b)]?.done);
+  const nextBlock=blocks.sort((a,b)=>mins(a.start)-mins(b.start)).find(b=>mins(b.start)>nowMins());
+  try{
+    const res=await callClaude([{role:'user',content:`You are a warm, empathetic AI coach. The user has ${done.length} tasks done and ${pending.length} remaining today.${nextBlock?` Their next task is "${nextBlock.name}" at ${fmt(nextBlock.start)}.`:''} They clicked "Motivate Me!" — they need encouragement. Be genuinely warm, personal, and motivating in 3-4 sentences. Acknowledge the effort already made and inspire them to keep going. No generic platitudes — be real and specific.`}],200);
+    document.getElementById('motivateResponse').textContent=res;document.getElementById('motivateResponse').style.display='block';document.getElementById('remotivatebtn').style.display='flex';
+  }catch(e){document.getElementById('motivateResponse').textContent='You\'re doing amazing! Keep pushing — every small step counts. 💪';}
+  document.getElementById('motivateLoading').style.display='none';
+}
 
-  const surveyCtx = surveyHistory.length ? `\nUser survey insights: ${JSON.stringify(surveyHistory.slice(-3))}` : '';
-  const profileCtx = profileSummary ? `\nUser profile: ${profileSummary}` : '';
+// ─── SOMETHING CAME UP ────────────────────────────────────────────────────────
+async function handleCameUp(type){
+  const el=document.getElementById('cameUpResult');el.style.display='block';el.innerHTML='<div class="spinner"></div> AI is rescheduling your day...';
+  const remaining=blocks.filter(b=>mins(b.start)>nowMins()&&!checklist[blockId(b)]?.done).map(b=>`${b.name} (${fmt(b.start)}-${fmt(b.end)})`).join(', ');
+  try{
+    const res=await callClaude([{role:'user',content:`A "${type}" just came up for the user. Their remaining tasks today: ${remaining||'none'}. Briefly (2 sentences) suggest how to handle the rest of the day — which tasks to keep, skip, or move. Be practical and encouraging.`}],150);
+    el.innerHTML=`<div style="padding:10px;background:rgba(200,240,100,0.05);border-radius:8px;border:1px solid rgba(200,240,100,0.1)"><div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:4px">AI SUGGESTION</div>${res}</div>`;
+    toast('Schedule updated',`AI adjusted for your ${type.toLowerCase()}.`,'success');
+  }catch(e){el.innerHTML='Could not generate suggestion.';}
+}
 
-  try {
-    const res=await fetch(CLAUDE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-6',max_tokens:1000,
-      system:`You are an intelligent schedule assistant for PlannerAI. Build practical schedules based on user input. Always respond conversationally AND include a JSON block (wrapped in triple backtick json) with schedule blocks. Each block: {"name":string,"type":"school"|"work"|"personal"|"health","start":"HH:MM","end":"HH:MM","notifMins":10,"priority":"high"|"medium"|"low"}. Only output blocks for today's representative schedule. Be specific and realistic.${surveyCtx}${profileCtx}`,
-      messages:aiConversation
-    })});
-    const data=await res.json();
-    const reply=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
-    aiConversation.push({role:'assistant',content:reply});
-    save('aiConvo',aiConversation);
+// ─── EXAM MODE ────────────────────────────────────────────────────────────────
+async function generateExamPlan(){
+  const input=document.getElementById('examInput').value.trim();if(!input){toast('Missing info','Describe your exams first.','warning');return;}
+  const hours=document.getElementById('examHours').value;const session=document.getElementById('examSession').value;
+  const el=document.getElementById('examResult');el.style.display='block';el.innerHTML='<div class="spinner"></div> Building your study plan...';
+  try{
+    const res=await callClaude([{role:'user',content:`Create a concise exam study plan. Exams: ${input}. Available: ${hours}hrs/day, preferred: ${session}. Format as a simple day-by-day plan for the next 7 days. Be specific with subjects and timings. Keep it under 200 words.`}],400);
+    el.innerHTML=`<div style="font-size:13px;line-height:1.8;white-space:pre-wrap;padding:14px;background:var(--bg3);border-radius:8px">${res}</div><button class="btn primary btn-sm mt-sm" onclick="closeModal('examModal')">Close</button>`;
+  }catch(e){el.innerHTML='Could not generate plan.';}
+}
+
+// ─── AI SCHEDULER ─────────────────────────────────────────────────────────────
+async function sendAI(){
+  const inp=document.getElementById('aiInput');const msg=inp.value.trim();if(!msg)return;
+  inp.value='';aiConversation.push({role:'user',content:msg});save('aiConvo',aiConversation);renderAIMessages();
+  document.getElementById('aiSendBtn').innerHTML='<div class="spinner"></div>';document.getElementById('aiSendBtn').disabled=true;
+  const surveyCtx=surveyHistory.length?`\nUser preferences from surveys: ${JSON.stringify(surveyHistory.slice(-2))}`:'';
+  const profileCtx=profileSummary?`\nUser profile: ${profileSummary}`:'';
+  try{
+    const res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:`You are PlannerAI, an intelligent schedule assistant. When user describes tasks, automatically estimate durations, add break times, and create a realistic timetable. Always respond conversationally AND include a JSON block (in triple backtick json) with schedule blocks array. Each block: {"name":string,"type":"school"|"work"|"personal"|"health","start":"HH:MM","end":"HH:MM","notifMins":10,"priority":"high"|"medium"|"low"}. Add 10-15min break blocks between long sessions. Be specific and practical.${surveyCtx}${profileCtx}`,messages:aiConversation})});
+    const data=await res.json();const reply=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+    aiConversation.push({role:'assistant',content:reply});save('aiConvo',aiConversation);
     const jsonMatch=reply.match(/```json\s*([\s\S]*?)```/);
-    if(jsonMatch){ try{ aiPendingBlocks=JSON.parse(jsonMatch[1]); document.getElementById('aiAddRow').style.display='flex'; renderAIPreview(); }catch(e){} }
+    if(jsonMatch){try{aiPendingBlocks=JSON.parse(jsonMatch[1]);document.getElementById('aiAddRow').style.display='flex';renderAIPreview();}catch(e){}}
     renderAIMessages();
-  } catch(e){ toast('Error','Could not reach Claude API.','warning'); }
-  document.getElementById('aiSendBtn').innerHTML='<i class="ti ti-send"></i> Send';
-  document.getElementById('aiSendBtn').disabled=false;
+  }catch(e){toast('Error','Could not reach Claude API.','warning');}
+  document.getElementById('aiSendBtn').innerHTML='<i class="ti ti-send"></i> Send';document.getElementById('aiSendBtn').disabled=false;
 }
 
-function renderAIMessages() {
+function renderAIMessages(){
   const el=document.getElementById('aiMessages');
-  el.innerHTML=aiConversation.map(m=>{
-    const clean=m.content.replace(/```json[\s\S]*?```/g,'[Schedule generated ✓]').trim();
-    return `<div class="msg ${m.role}">${m.role==='assistant'?'<div class="msg-label">✦ PlannerAI</div>':''}${clean}</div>`;
-  }).join('');
+  el.innerHTML=aiConversation.map(m=>{const clean=m.content.replace(/```json[\s\S]*?```/g,'[Schedule generated ✓]').trim();return`<div class="msg ${m.role}">${m.role==='assistant'?'<div class="msg-label">✦ PlannerAI</div>':''}${clean}</div>`;}).join('');
   el.scrollTop=el.scrollHeight;
 }
-
-function renderAIPreview() {
-  const el=document.getElementById('aiPreviewList');
-  document.getElementById('aiPreviewCard').style.display='block';
+function renderAIPreview(){
+  const el=document.getElementById('aiPreviewList');document.getElementById('aiPreviewCard').style.display='block';
   el.innerHTML=aiPendingBlocks.map(b=>`<div class="block-item ${b.type}"><span class="block-time">${fmt(b.start)} – ${fmt(b.end)}</span><span class="block-name">${b.name}</span><span class="tag tag-${b.type}">${b.type}</span></div>`).join('');
 }
+function addAIBlocks(){aiPendingBlocks.forEach(b=>blocks.push({...b,notes:''}));saveAll();render();scheduleNotifications();document.getElementById('aiPreviewCard').style.display='none';document.getElementById('aiAddRow').style.display='none';toast('Added!',`${aiPendingBlocks.length} blocks added.`,'success');aiPendingBlocks=[];showPage('dashboard',document.querySelector('.nav-item'));}
 
-function addAIBlocks() {
-  aiPendingBlocks.forEach(b=>blocks.push({...b,notes:''}));
-  saveAll(); render(); scheduleNotifications();
-  document.getElementById('aiPreviewCard').style.display='none';
-  document.getElementById('aiAddRow').style.display='none';
-  toast('Added!',`${aiPendingBlocks.length} blocks added.`,'success');
-  aiPendingBlocks=[];
-  showPage('dashboard',document.querySelector('.nav-item'));
+// ─── SPEECH TO TEXT ───────────────────────────────────────────────────────────
+function toggleMic(){
+  if(!('webkitSpeechRecognition' in window)&&!('SpeechRecognition' in window)){toast('Not supported','Speech recognition not available in this browser.','warning');return;}
+  if(recognition&&recognition.active){recognition.stop();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new SR();recognition.active=true;recognition.continuous=false;recognition.interimResults=false;recognition.lang='en-US';
+  recognition.onstart=()=>{document.getElementById('micBtn').classList.add('recording');document.getElementById('micStatus').style.display='block';};
+  recognition.onresult=(e)=>{const transcript=e.results[0][0].transcript;document.getElementById('aiInput').value=transcript;toast('🎤 Got it!',`"${transcript}"`, 'success');};
+  recognition.onend=()=>{recognition.active=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('micStatus').style.display='none';};
+  recognition.onerror=()=>{recognition.active=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('micStatus').style.display='none';};
+  recognition.start();
 }
 
-// ─── WEEKLY REPORT MODAL ─────────────────────────────────────────────────────
-function openWeeklyReport() {
-  const today=new Date();
-  document.getElementById('reportModalDate').textContent=`Week of ${today.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}`;
-  const days=[]; for(let i=6;i>=0;i--){ const d=new Date(today); d.setDate(today.getDate()-i); days.push(d); }
-  const rows=days.map(d=>{ const k=d.toISOString().slice(0,10); const h=weekHistory[k]||{total:0,done:0}; const pct=h.total?Math.round(h.done/h.total*100):0; return `<div class="row between" style="padding:8px 0;border-bottom:1px solid var(--border)"><span>${DAYS[d.getDay()]} ${d.getDate()}</span><div class="row" style="gap:8px"><div style="width:120px"><div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:var(--accent)"></div></div></div><span class="text-sm" style="min-width:32px;text-align:right">${pct}%</span></div></div>`; }).join('');
-  document.getElementById('reportContent').innerHTML=rows;
-  document.getElementById('reportModal').classList.add('open');
+// ─── IMPORT FILE ──────────────────────────────────────────────────────────────
+function handleImportDrop(e){e.preventDefault();document.getElementById('importZone').classList.remove('drag');handleImportFiles(e.dataTransfer.files);}
+async function handleImportFiles(files){
+  if(!files||!files.length)return;const fileArr=Array.from(files);
+  const listEl=document.getElementById('importFileList');listEl.innerHTML=fileArr.map(f=>`<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}</div>`).join('');
+  document.getElementById('importParseStatus').style.display='block';
+  try{
+    const messages=[];
+    for(const file of fileArr){
+      const isImage=file.type.startsWith('image/');
+      if(isImage){const b64=await fileToBase64(file);messages.push({role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type,data:b64}},{type:'text',text:'Extract all schedule blocks from this timetable image.'}]});}
+      else{const text=await fileToText(file);messages.push({role:'user',content:`Schedule document:\n\n${text}\n\nExtract all schedule blocks.`});}
+    }
+    messages.push({role:'user',content:`Output ONLY a JSON block (triple backtick json) with schedule blocks array. Each: {"name":string,"type":"school"|"work"|"personal"|"health","start":"HH:MM","end":"HH:MM","notifMins":10,"priority":"medium"}. Write 1 sentence summary before the JSON.`});
+    const res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages})});
+    const data=await res.json();const reply=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+    aiConversation.push({role:'assistant',content:reply});save('aiConvo',aiConversation);
+    const jsonMatch=reply.match(/```json\s*([\s\S]*?)```/);
+    if(jsonMatch){try{aiPendingBlocks=JSON.parse(jsonMatch[1]);document.getElementById('aiAddRow').style.display='flex';renderAIPreview();toast('Schedule detected!',`Found ${aiPendingBlocks.length} blocks.`,'success');}catch(e){toast('Parse error','Could not read schedule.','warning');}}
+    else{toast('No blocks found','Try a clearer image or structured file.','warning');}
+    renderAIMessages();
+  }catch(e){toast('Error','Could not process file.','warning');}
+  document.getElementById('importParseStatus').style.display='none';
 }
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});}
+function fileToText(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(file);});}
 
-async function generateWeeklySummary() {
-  const el=document.getElementById('wkAISummary');
-  el.innerHTML='<div class="spinner"></div> Generating...';
+// ─── WEEKLY SUMMARY ───────────────────────────────────────────────────────────
+async function generateWeeklySummary(){
+  const el=document.getElementById('wkAISummary');el.innerHTML='<div class="spinner"></div> Generating...';
   const data=Object.entries(weekHistory).slice(-7).map(([d,v])=>`${d}: ${v.done}/${v.total} done`).join(', ');
-  try {
-    const res=await fetch(CLAUDE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:300,
-      messages:[{role:'user',content:`Weekly data: ${data}. Write a short, encouraging 3-sentence weekly summary with 1 tip. Be personal and warm.`}]
-    })});
-    const d=await res.json();
-    el.textContent=d.content[0]?.text||'Could not generate summary.';
-  } catch(e){ el.textContent='Could not reach Claude.'; }
+  try{const res=await callClaude([{role:'user',content:`Weekly schedule data: ${data}. Current streak: ${streak} days. Write a warm, encouraging 3-sentence weekly summary with 1 actionable tip for next week.`}],200);el.textContent=res;}
+  catch(e){el.textContent='Could not generate summary.';}
 }
 
-// ─── WEEKLY SURVEY ────────────────────────────────────────────────────────────
-function checkWeeklySurveyDue() {
-  const last=load('lastSurvey',null);
-  if(!last) return; // first time, don't auto-prompt
-  const daysSince=(Date.now()-new Date(last).getTime())/(1000*60*60*24);
-  if(daysSince>=7) setTimeout(()=>{ toast('Weekly survey due','Help the AI learn your preferences!','info'); },3000);
-}
-
-const SURVEY_Qs = [
-  {q:"How productive did you feel this week?", type:"rating", max:5},
-  {q:"What type of tasks felt most satisfying?", type:"choice", opts:["School/Study","Work","Exercise","Personal projects","Social"]},
-  {q:"What was your biggest scheduling challenge?", type:"choice", opts:["Too many tasks","Not enough breaks","Distractions","Unexpected events","Lack of motivation"]},
-  {q:"What would you like more of in your schedule?", type:"choice", opts:["Study time","Exercise","Free time","Work blocks","Social time"]},
-  {q:"How do you prefer your mornings?", type:"choice", opts:["Light tasks only","Hard tasks first","Flexible","Meetings/calls","Exercise first"]},
+// ─── SURVEY ───────────────────────────────────────────────────────────────────
+const SURVEY_Qs=[
+  {q:"How productive did you feel this week?",type:"rating",max:5},
+  {q:"What scheduling challenge did you face most?",type:"choice",opts:["Too many tasks","Not enough breaks","Distractions","Unexpected events","Lack of motivation","Difficulty prioritising"]},
+  {q:"How comfortable were you following the schedule?",type:"rating",max:5},
+  {q:"What would you like more of next week?",type:"choice",opts:["Study time","Exercise","Free time","Work blocks","Social time","Sleep"]},
+  {q:"How can the schedule be improved?",type:"choice",opts:["More flexible","Less tasks","Better timings","More breaks","More variety","It's good as is"]},
 ];
-
-let surveyAnswers = {};
-function openSurvey() {
+let surveyAnswers={};
+function openSurvey(){
   surveyAnswers={};
   document.getElementById('surveyContent').innerHTML=SURVEY_Qs.map((q,i)=>{
-    if(q.type==='rating') return `<div class="survey-q"><p>${i+1}. ${q.q}</p><div class="rating-row">${Array.from({length:q.max},(_,j)=>`<button class="rating-btn" onclick="selectRating(${i},${j+1},this)">${j+1}</button>`).join('')}</div></div>`;
-    return `<div class="survey-q"><p>${i+1}. ${q.q}</p><div class="survey-options">${q.opts.map(o=>`<div class="survey-opt" onclick="selectOpt(${i},this,'${o}')">${o}</div>`).join('')}</div></div>`;
+    if(q.type==='rating')return`<div class="survey-q"><p>${i+1}. ${q.q}</p><div class="rating-row">${Array.from({length:q.max},(_,j)=>`<button class="rating-btn" onclick="selectRating(${i},${j+1},this)">${j+1}</button>`).join('')}</div></div>`;
+    return`<div class="survey-q"><p>${i+1}. ${q.q}</p><div class="survey-options">${q.opts.map(o=>`<div class="survey-opt" onclick="selectOpt(${i},this,'${o}')">${o}</div>`).join('')}</div></div>`;
   }).join('');
-  document.getElementById('surveyModal').classList.add('open');
+  openModal('surveyModal');
 }
-
-function selectRating(qi,val,btn){ document.querySelectorAll(`.rating-btn`).forEach((b,i)=>{ if(b.closest('.survey-q')===btn.closest('.survey-q')) b.classList.remove('selected'); }); btn.classList.add('selected'); surveyAnswers[qi]=val; }
-function selectOpt(qi,el,val){ el.closest('.survey-options').querySelectorAll('.survey-opt').forEach(o=>o.classList.remove('selected')); el.classList.add('selected'); surveyAnswers[qi]=val; }
-
-async function submitSurvey() {
-  const entry={date:new Date().toISOString(),answers:surveyAnswers};
-  surveyHistory.push(entry); save('surveys',surveyHistory); save('lastSurvey',new Date().toISOString());
-  closeModal('surveyModal');
-  toast('Survey submitted','AI has updated your preferences.','success');
-  // Update AI insight
-  try {
-    const res=await fetch(CLAUDE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:120,
-      messages:[{role:'user',content:`Based on survey: ${JSON.stringify(surveyAnswers)}, give a single 2-sentence personalized scheduling tip. Be direct and practical.`}]
-    })});
-    const d=await res.json();
-    document.getElementById('aiInsight').textContent=d.content[0]?.text||'';
-  } catch(e){}
+function selectRating(qi,val,btn){btn.closest('.survey-q').querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');surveyAnswers[qi]=val;}
+function selectOpt(qi,el,val){el.closest('.survey-options').querySelectorAll('.survey-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');surveyAnswers[qi]=val;}
+async function submitSurvey(){
+  surveyHistory.push({date:new Date().toISOString(),answers:surveyAnswers});saveAll();closeModal('surveyModal');toast('Survey submitted','AI preferences updated.','success');
+  try{const res=await callClaude([{role:'user',content:`Survey results: ${JSON.stringify(surveyAnswers)}. Give a single 2-sentence personalized scheduling tip based on these preferences.`}],100);document.getElementById('aiInsight').textContent=res;}catch(e){}
 }
 
 // ─── UPLOADS ──────────────────────────────────────────────────────────────────
-function handleUpload(type, input) {
-  const files=Array.from(input.files);
-  files.forEach(f=>{ if(!uploadedFiles[type].find(u=>u.name===f.name)) uploadedFiles[type].push({name:f.name,size:f.size}); });
-  saveAll(); renderUploads();
-  document.getElementById('profileSumBtn').style.display='flex';
-  toast('Uploaded',`${files.length} file(s) ready for AI analysis.`,'success');
+function handleUpload(type,input){
+  Array.from(input.files).forEach(f=>{if(!uploadedFiles[type].find(u=>u.name===f.name))uploadedFiles[type].push({name:f.name,size:f.size});});
+  saveAll();renderUploads();toast('Uploaded','Files ready for AI analysis.','success');
+}
+function renderUploads(){
+  ['medical','educational'].forEach(type=>{const el=document.getElementById(type==='medical'?'medFiles':'eduFiles');el.innerHTML=uploadedFiles[type].map(f=>`<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}</div>`).join('');});
+}
+async function generateProfileSummary(){
+  const el=document.getElementById('profileSummary');el.innerHTML='<div class="spinner"></div> Analysing...';
+  const med=uploadedFiles.medical.map(f=>f.name).join(', ')||'none';const edu=uploadedFiles.educational.map(f=>f.name).join(', ')||'none';
+  try{const res=await callClaude([{role:'user',content:`Medical reports: "${med}", Educational reports: "${edu}". Write a 3-sentence profile on how these affect an ideal schedule (rest needs, study pacing, health breaks).`}],200);profileSummary=res;save('profile',profileSummary);el.textContent=res;toast('Profile updated','AI profile generated.','success');}
+  catch(e){el.textContent='Could not generate profile.';}
 }
 
-function renderUploads() {
-  ['medical','educational'].forEach(type=>{
-    const el=document.getElementById(type==='medical'?'medFiles':'eduFiles');
-    el.innerHTML=uploadedFiles[type].map(f=>`<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}<span style="margin-left:auto;color:var(--text3);font-size:11px">${(f.size/1024).toFixed(1)}KB</span></div>`).join('');
-  });
+// ─── SHARED API CALL ──────────────────────────────────────────────────────────
+async function callClaude(messages,maxTokens=200){
+  const res=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:maxTokens,messages})});
+  const data=await res.json();return data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
 }
 
-async function generateProfileSummary() {
-  const el=document.getElementById('profileSummary');
-  el.innerHTML='<div class="spinner"></div> Analysing reports...';
-  const medFiles=uploadedFiles.medical.map(f=>f.name).join(', ')||'none';
-  const eduFiles=uploadedFiles.educational.map(f=>f.name).join(', ')||'none';
-  try {
-    const res=await fetch(CLAUDE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:200,
-      messages:[{role:'user',content:`A student has uploaded medical reports: "${medFiles}" and educational reports: "${eduFiles}". Write a 3-sentence profile summary describing how these might affect their ideal schedule (e.g. rest needs, study pacing, health breaks). Be realistic and helpful.`}]
-    })});
-    const d=await res.json();
-    profileSummary=d.content[0]?.text||'';
-    save('profile',profileSummary);
-    el.textContent=profileSummary;
-    toast('Profile updated','AI profile generated from your reports.','success');
-  } catch(e){ el.textContent='Could not generate profile.'; }
+// ─── USER ─────────────────────────────────────────────────────────────────────
+function updateUserName(){const val=document.getElementById('userNameInput').value.trim();if(val){userName=val;save('userName',val);document.getElementById('userName').textContent=val;document.getElementById('userInitial').textContent=val[0].toUpperCase();}}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function toast(title,body,type='info'){const c=document.getElementById('toastContainer');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<div class="toast-title">${title}</div><div class="toast-body">${body}</div>`;c.appendChild(t);setTimeout(()=>t.remove(),5000);}
+
+// ─── FINANCE ──────────────────────────────────────────────────────────────────
+async function fetchMarkets(){
+  const el=document.getElementById('mkLastUpdate');el.textContent='Fetching...';
+  try{
+    // CoinGecko free API for crypto
+    const cryptoRes=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
+    const crypto=await cryptoRes.json();
+    setMk('mk-btc','mk-btc-ch','$'+fmtNum(crypto.bitcoin?.usd),crypto.bitcoin?.usd_24h_change);
+    setMk('mk-eth','mk-eth-ch','$'+fmtNum(crypto.ethereum?.usd),crypto.ethereum?.usd_24h_change);
+    // Exchange rate
+    const fxRes=await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const fx=await fxRes.json();
+    const inr=fx.rates?.INR;
+    if(inr){document.getElementById('mk-usdinr').textContent='₹'+inr.toFixed(2);document.getElementById('mk-usdinr-ch').textContent='live rate';}
+  }catch(e){}
+  // Use AI to get market summary since free stock APIs are limited
+  try{
+    const res=await callClaude([{role:'user',content:'Give me today\'s approximate values for: Nifty 50, Sensex, S&P 500, Nasdaq, Gold (USD/oz). Format as JSON: {"nifty":number,"sensex":number,"sp":number,"nasdaq":number,"gold":number}. Use your best knowledge. Only output the JSON.'}],150);
+    const clean=res.replace(/```json|```/g,'').trim();
+    const d=JSON.parse(clean);
+    if(d.nifty)setMk('mk-nifty','mk-nifty-ch',fmtNum(d.nifty),null,'approx');
+    if(d.sensex)setMk('mk-sensex','mk-sensex-ch',fmtNum(d.sensex),null,'approx');
+    if(d.sp)setMk('mk-sp','mk-sp-ch',fmtNum(d.sp),null,'approx');
+    if(d.nasdaq)setMk('mk-nasdaq','mk-nasdaq-ch',fmtNum(d.nasdaq),null,'approx');
+    if(d.gold)setMk('mk-gold','mk-gold-ch','$'+fmtNum(d.gold),null,'approx');
+  }catch(e){}
+  el.textContent='Updated '+new Date().toLocaleTimeString();
 }
 
-// ─── USER NAME ───────────────────────────────────────────────────────────────
-function updateUserName() {
-  const val=document.getElementById('userNameInput').value.trim();
-  if(val){ userName=val; save('userName',val); document.getElementById('userName').textContent=val; document.getElementById('userInitial').textContent=val[0].toUpperCase(); }
+function setMk(valId,chId,val,pct,label){
+  document.getElementById(valId).textContent=val;
+  const ch=document.getElementById(chId);
+  if(pct!=null){const up=pct>=0;ch.textContent=(up?'▲':'▼')+Math.abs(pct).toFixed(2)+'% 24h';ch.style.color=up?'var(--green)':'var(--red)';}
+  else if(label){ch.textContent=label;ch.style.color='var(--text3)';}
+}
+function fmtNum(n){if(n>=10000000)return(n/10000000).toFixed(2)+'Cr';if(n>=100000)return(n/100000).toFixed(2)+'L';if(n>=1000)return n.toLocaleString('en-IN');return n?.toString()||'—';}
+
+// BUDGET
+function saveBudget(){budget.income=parseFloat(document.getElementById('budgetIncome').value)||0;budget.savingsPct=parseFloat(document.getElementById('budgetSavingsPct').value)||20;saveAll();renderBudget();}
+function addExpenseCategory(){budget.expenses.push({name:'New category',amount:0});saveAll();renderBudget();}
+function renderBudget(){
+  const el=document.getElementById('expenseCategories');
+  el.innerHTML=budget.expenses.map((e,i)=>`<div class="row between" style="gap:8px;margin-bottom:8px"><input type="text" value="${e.name}" style="flex:2" onchange="budget.expenses[${i}].name=this.value;saveAll()"><input type="number" value="${e.amount||''}" placeholder="₹" style="flex:1" onchange="budget.expenses[${i}].amount=parseFloat(this.value)||0;saveAll();renderBudgetSummary()"><button class="icon-btn" onclick="budget.expenses.splice(${i},1);saveAll();renderBudget()"><i class="ti ti-trash"></i></button></div>`).join('');
+  renderBudgetSummary();
+}
+function renderBudgetSummary(){
+  const income=budget.income||0;const savingsPct=budget.savingsPct||20;
+  const totalExp=budget.expenses.reduce((a,e)=>a+(e.amount||0),0);
+  const savingsTarget=Math.round(income*savingsPct/100);const remaining=income-totalExp;const deficit=remaining<savingsTarget;
+  const el=document.getElementById('budgetSummary');
+  if(!income){el.innerHTML='<div class="text-muted text-sm">Enter your income above to see summary.</div>';return;}
+  el.innerHTML=`
+    <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px">Monthly income</span><span style="font-weight:600;color:var(--green)">₹${income.toLocaleString('en-IN')}</span></div>
+    <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px">Total expenses</span><span style="font-weight:600;color:var(--red)">₹${totalExp.toLocaleString('en-IN')}</span></div>
+    <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px">Savings target</span><span style="font-weight:600;color:var(--blue)">₹${savingsTarget.toLocaleString('en-IN')}</span></div>
+    <div class="row between" style="padding:8px 0"><span style="font-size:13px;font-weight:600">Remaining</span><span style="font-weight:700;color:${deficit?'var(--red)':'var(--green)'}">₹${remaining.toLocaleString('en-IN')} ${deficit?'⚠️ deficit':''}</span></div>
+    <div class="progress-bar mt-sm"><div class="progress-fill" style="width:${Math.min(100,Math.round(totalExp/income*100))}%;background:${deficit?'var(--red)':'var(--accent)'}"></div></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:4px">${Math.round(totalExp/income*100)}% of income spent</div>`;
 }
 
-// ─── MODALS & TOASTS ─────────────────────────────────────────────────────────
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
-function toast(title,body,type='info'){
-  const c=document.getElementById('toastContainer');
-  const t=document.createElement('div'); t.className=`toast ${type}`;
-  t.innerHTML=`<div class="toast-title">${title}</div><div class="toast-body">${body}</div>`;
-  c.appendChild(t); setTimeout(()=>t.remove(),5000);
+// BILLS
+function addBill(){
+  const name=document.getElementById('billName').value.trim();const amount=parseFloat(document.getElementById('billAmount').value)||0;
+  const due=parseInt(document.getElementById('billDue').value)||1;const freq=document.getElementById('billFreq').value;
+  if(!name||!amount){toast('Missing fields','Enter bill name and amount.','warning');return;}
+  bills.push({name,amount,due,freq});saveAll();renderBills();
+  document.getElementById('billName').value='';document.getElementById('billAmount').value='';
+  toast('Bill added',`${name} added.`,'success');
+}
+function renderBills(){
+  const el=document.getElementById('billsList');
+  if(!bills.length){el.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-receipt"></i><p>No bills yet.</p></div>';return;}
+  const today=new Date().getDate();
+  el.innerHTML=bills.map((b,i)=>{
+    const daysLeft=b.due>=today?b.due-today:30-(today-b.due);
+    const urgent=daysLeft<=3;
+    return`<div class="row between" style="padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;${urgent?'border-color:rgba(248,113,113,0.3)':''}">
+      <div><div style="font-size:13px;font-weight:500">${b.name}</div><div style="font-size:11px;color:var(--text3)">${b.freq} · due day ${b.due} ${urgent?'<span style="color:var(--red)">· due soon!</span>':''}</div></div>
+      <div class="row" style="gap:8px"><span style="font-weight:600;color:var(--amber)">₹${b.amount.toLocaleString('en-IN')}</span><button class="icon-btn" onclick="bills.splice(${i},1);saveAll();renderBills()"><i class="ti ti-trash"></i></button></div>
+    </div>`;
+  }).join('');
 }
 
-// ─── IMPORT SCHEDULE FROM FILE / IMAGE ───────────────────────────────────────
-function handleImportDrop(e) {
-  e.preventDefault();
-  document.getElementById('importZone').classList.remove('drag');
-  handleImportFiles(e.dataTransfer.files);
+// GOALS
+function addGoal(){
+  const name=document.getElementById('goalName').value.trim();const target=parseFloat(document.getElementById('goalTarget').value)||0;
+  const saved=parseFloat(document.getElementById('goalSaved').value)||0;const deadline=document.getElementById('goalDeadline').value;const type=document.getElementById('goalType').value;
+  if(!name||!target){toast('Missing fields','Enter goal name and target amount.','warning');return;}
+  goals.push({name,target,saved,deadline,type});saveAll();renderGoals();
+  document.getElementById('goalName').value='';document.getElementById('goalTarget').value='';document.getElementById('goalSaved').value='0';
+  toast('Goal added',`${name} added!`,'success');
+}
+function renderGoals(){
+  const el=document.getElementById('goalsList');
+  if(!goals.length){el.innerHTML='<div class="empty" style="padding:12px"><i class="ti ti-target"></i><p>No goals yet.</p></div>';return;}
+  el.innerHTML=goals.map((g,i)=>{
+    const pct=Math.min(100,Math.round((g.saved/g.target)*100));
+    const remaining=g.target-g.saved;
+    let monthsLeft=0;if(g.deadline){const now=new Date();const dl=new Date(g.deadline+'-01');monthsLeft=Math.max(0,Math.round((dl-now)/(1000*60*60*24*30)));}
+    const monthly=monthsLeft>0?Math.ceil(remaining/monthsLeft):remaining;
+    const icons={savings:'💰',purchase:'🛍️',emergency:'🛡️',education:'🎓',travel:'✈️'};
+    return`<div style="padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px">
+      <div class="row between" style="margin-bottom:6px">
+        <div style="font-weight:600">${icons[g.type]||'🎯'} ${g.name}</div>
+        <div class="row" style="gap:6px"><span style="font-size:12px;color:var(--text3)">₹${g.saved.toLocaleString('en-IN')} / ₹${g.target.toLocaleString('en-IN')}</span><button class="icon-btn" onclick="goals.splice(${i},1);saveAll();renderGoals()"><i class="ti ti-trash"></i></button></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+      <div class="row between mt-sm"><span style="font-size:11px;color:var(--text3)">${pct}% complete${g.deadline?' · '+monthsLeft+' months left':''}</span>${monthsLeft>0?`<span style="font-size:11px;font-weight:600;color:var(--blue)">₹${monthly.toLocaleString('en-IN')}/mo needed</span>`:''}</div>
+      <div class="row mt-sm" style="gap:6px"><input type="number" placeholder="Add savings ₹" style="width:120px;padding:5px 8px;font-size:12px" id="addSav${i}"><button class="btn btn-sm ghost" onclick="addToGoal(${i})">+ Add</button></div>
+    </div>`;
+  }).join('');
+}
+function addToGoal(i){const inp=document.getElementById('addSav'+i);const amt=parseFloat(inp.value)||0;if(!amt)return;goals[i].saved=Math.min(goals[i].target,(goals[i].saved||0)+amt);saveAll();renderGoals();toast('Savings added!',`₹${amt.toLocaleString('en-IN')} added to ${goals[i].name}.`,'success');}
+
+// FINANCE AI
+async function askFinanceAI(){
+  const inp=document.getElementById('finAIInput');const q=inp.value.trim();if(!q)return;inp.value='';
+  const el=document.getElementById('finAIAdvice');el.innerHTML='<div class="spinner"></div> Thinking...';
+  const ctx=`Budget: income ₹${budget.income}, expenses: ${budget.expenses.map(e=>e.name+' ₹'+e.amount).join(', ')}, savings target ${budget.savingsPct}%. Goals: ${goals.map(g=>g.name+' ₹'+g.target).join(', ')||'none'}.`;
+  try{const res=await callClaude([{role:'user',content:`${ctx}\n\nUser question: ${q}\n\nAnswer in 3 sentences max. Be practical and specific to their data. Remind this is not professional financial advice.`}],200);el.textContent=res;}
+  catch(e){el.textContent='Could not reach AI.';}
+}
+async function getAutoFinanceAdvice(){
+  const el=document.getElementById('finAIAdvice');el.innerHTML='<div class="spinner"></div> Analysing your finances...';
+  const totalExp=budget.expenses.reduce((a,e)=>a+(e.amount||0),0);const savingsTarget=Math.round((budget.income||0)*(budget.savingsPct||20)/100);
+  const billsTotal=bills.filter(b=>b.freq==='monthly').reduce((a,b)=>a+b.amount,0);
+  const ctx=`Income: ₹${budget.income||0}/mo. Expenses: ₹${totalExp}/mo (${budget.expenses.map(e=>e.name+' ₹'+e.amount).join(', ')}). Bills: ₹${billsTotal}/mo. Savings target: ₹${savingsTarget}/mo. Goals: ${goals.map(g=>g.name+' target ₹'+g.target+' saved ₹'+g.saved+(g.deadline?' by '+g.deadline:'')).join('; ')||'none set'}.`;
+  try{const res=await callClaude([{role:'user',content:`Financial snapshot: ${ctx}\n\nGive 3 specific, actionable insights about this person's finances. Be encouraging but honest. Keep it under 100 words. Note this is not professional financial advice.`}],250);el.textContent=res;}
+  catch(e){el.textContent='Could not generate analysis.';}
 }
 
-async function handleImportFiles(files) {
-  if (!files || !files.length) return;
-  const fileArr = Array.from(files);
-  const listEl = document.getElementById('importFileList');
-  listEl.innerHTML = fileArr.map(f => `<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}<span style="margin-left:auto;color:var(--text3);font-size:11px">${(f.size/1024).toFixed(1)}KB</span></div>`).join('');
-
-  document.getElementById('importParseStatus').style.display = 'block';
-
-  try {
-    const messages = [];
-
-    for (const file of fileArr) {
-      const isImage = file.type.startsWith('image/');
-      const isPDF = file.type === 'application/pdf';
-
-      if (isImage) {
-        const b64 = await fileToBase64(file);
-        messages.push({
-          role: 'user',
-          content: [
-            { type: 'image', source: { type: 'base64', media_type: file.type, data: b64 } },
-            { type: 'text', text: 'This is a timetable or schedule image. Extract all schedule blocks from it.' }
-          ]
-        });
-      } else {
-        // Read as text for txt/csv/doc etc
-        const text = await fileToText(file);
-        messages.push({ role: 'user', content: `Here is a schedule document:\n\n${text}\n\nExtract all schedule blocks from it.` });
-      }
-    }
-
-    // Final extraction instruction
-    messages.push({
-      role: 'user',
-      content: `Based on the schedule(s) above, output ONLY a JSON block (in triple backtick json) with an array of schedule blocks. Each block: {"name":string,"type":"school"|"work"|"personal"|"health","start":"HH:MM","end":"HH:MM","notifMins":10,"priority":"medium"}. Use 24-hour HH:MM format. Also write 1 sentence summarising what you found before the JSON.`
-    });
-
-    const res = await fetch(CLAUDE_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages })
-    });
-    const data = await res.json();
-    const reply = data.content.filter(c => c.type === 'text').map(c => c.text).join('');
-
-    // Push into conversation
-    aiConversation.push({ role: 'assistant', content: reply });
-    save('aiConvo', aiConversation);
-
-    const jsonMatch = reply.match(/```json\s*([\s\S]*?)```/);
-    if (jsonMatch) {
-      try {
-        aiPendingBlocks = JSON.parse(jsonMatch[1]);
-        document.getElementById('aiAddRow').style.display = 'flex';
-        renderAIPreview();
-        toast('Schedule detected!', `Found ${aiPendingBlocks.length} blocks. Preview below.`, 'success');
-      } catch(e) { toast('Parse error', 'Could not read the schedule structure.', 'warning'); }
-    } else {
-      toast('No blocks found', 'Try a clearer image or a structured text file.', 'warning');
-    }
-    renderAIMessages();
-  } catch(e) {
-    toast('Error', 'Could not process file. Try again.', 'warning');
-  }
-  document.getElementById('importParseStatus').style.display = 'none';
-}
-
-function fileToBase64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result.split(',')[1]);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-
-function fileToText(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.onerror = rej;
-    r.readAsText(file);
-  });
-}
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
-setInterval(()=>{ render(); scheduleNotifications(); },60000);
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+setInterval(()=>{render();scheduleNotifications();},60000);
 loadAll();
-renderUploads();
-if(aiConversation.length) renderAIMessages();
 </script>
 </body>
 </html>
