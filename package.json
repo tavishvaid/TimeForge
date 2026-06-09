@@ -1,0 +1,12 @@
+{
+  "name": "timeforge",
+  "version": "1.0.0",
+  "description": "TimeForge — Your Intelligent Daily Planner",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
