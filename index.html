@@ -829,8 +829,8 @@ async function handleAuth() {
 
 async function signOut() {
   await sb.auth.signOut();
-  document.getElementById('userDropdown').classList.remove('open');
-  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('userDropdown').style.display = 'none';
+  window.location.reload();
 }
 
 async function loadFromCloud() {
