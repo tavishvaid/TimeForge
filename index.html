@@ -341,10 +341,10 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="nav-item" onclick="showPage('privacy',this)"><i class="ti ti-shield-check"></i> Privacy & cookies</div>
   </nav>
   <div class="sidebar-footer" style="position:relative">
-    <div class="user-dropdown" id="userDropdown">
-      <button onclick="signOut()"><i class="ti ti-logout"></i> Sign out</button>
+    <div class="user-dropdown" id="userDropdown" style="position:absolute;bottom:110%;left:0;right:0;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:4px;display:none;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+      <button onclick="signOut()" style="width:100%;padding:10px 12px;background:none;border:none;color:var(--red);font-size:13px;font-family:var(--font);cursor:pointer;border-radius:6px;text-align:left;display:flex;align-items:center;gap:8px"><i class="ti ti-logout"></i> Sign out</button>
     </div>
-    <div class="user-chip" onclick="document.getElementById('userDropdown').classList.toggle('open')" style="cursor:pointer"><div class="user-avatar" id="userInitial">U</div><div><div style="font-size:13px;font-weight:500" id="userName">Your name</div><div style="font-size:11px;color:var(--text3)" id="userEmail">TimeForge</div></div><i class="ti ti-chevron-up" style="margin-left:auto;font-size:14px;color:var(--text3)"></i></div>
+    <div class="user-chip" id="userChip" style="cursor:pointer"><div class="user-avatar" id="userInitial">U</div><div><div style="font-size:13px;font-weight:500" id="userName">Your name</div><div style="font-size:11px;color:var(--text3)" id="userEmail">TimeForge</div></div><i class="ti ti-chevron-up" style="margin-left:auto;font-size:14px;color:var(--text3)"></i></div>
   </div>
 </aside>
 
@@ -887,11 +887,7 @@ sb.auth.onAuthStateChange(async (event, session) => {
   }
 });
 
-// Enter key on auth form
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('authPassword').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
-  document.getElementById('authEmail').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
-});
+// Enter key on auth form handled in INIT section below
 
 const API = '/api/claude';
 let blocks=[],notes=[],checklist={},deferredBlocks=[],aiPendingBlocks=[],notifTimers={},weekHistory={},surveyHistory=[],uploadedFiles={medical:[],educational:[]},profileSummary='',aiConversation=[],userName='User',healthGoals={fitness:'maintenance',mental:'none',water:8,calories:2000},wellness={water:0,calories:0},streak=0,deferTarget=null,taskConfirmTarget=null,recognition=null;
@@ -1516,6 +1512,21 @@ async function getAutoFinanceAdvice(){
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 setInterval(()=>{render();scheduleNotifications();},60000);
+
+// User chip dropdown
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('authPassword').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
+  document.getElementById('authEmail').addEventListener('keydown', e => { if(e.key==='Enter') handleAuth(); });
+  document.getElementById('userChip').addEventListener('click', () => {
+    const d = document.getElementById('userDropdown');
+    d.style.display = d.style.display === 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', e => {
+    if(!document.getElementById('userChip').contains(e.target) && !document.getElementById('userDropdown').contains(e.target)) {
+      document.getElementById('userDropdown').style.display = 'none';
+    }
+  });
+});
 // Auth state change handles initialization — see onAuthStateChange above
 </script>
 </body>
