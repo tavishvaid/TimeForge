@@ -338,6 +338,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="nav-item" onclick="showPage('notifications',this)"><i class="ti ti-bell"></i> Notifications</div>
     <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-medical"></i> Medical & Edu</div>
     <div class="nav-item" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</div>
+    <div class="nav-item" onclick="showPage('privacy',this)"><i class="ti ti-shield-check"></i> Privacy & cookies</div>
   </nav>
   <div class="sidebar-footer" style="position:relative">
     <div class="user-dropdown" id="userDropdown">
@@ -491,6 +492,14 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
         <div class="card-title"><i class="ti ti-eye"></i> Preview — blocks to add</div>
         <div class="block-list" id="aiPreviewList"></div>
       </div>
+
+      <!-- SCHEDULE HEALTH CHECK -->
+      <div class="card">
+        <div class="card-title"><i class="ti ti-stethoscope"></i> Schedule health check</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:12px">AI reviews your current schedule and points out mistakes, inefficiencies, and improvements.</p>
+        <div id="scheduleHealthResult" style="font-size:13px;color:var(--text2);line-height:1.8"></div>
+        <button class="btn primary btn-sm mt-sm" onclick="runScheduleHealthCheck()"><i class="ti ti-stethoscope"></i> Analyse my schedule</button>
+      </div>
     </div>
 
     <!-- HEALTH & WELLNESS -->
@@ -538,6 +547,52 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
               <div style="text-align:center"><div style="font-size:20px;font-weight:600;color:var(--purple)" id="weeklyAvgScore">-</div><div style="font-size:11px;color:var(--text3)">Weekly avg</div></div>
               <div style="text-align:center"><div style="font-size:20px;font-weight:600;color:var(--green)" id="bestDayScore">-</div><div style="font-size:11px;color:var(--text3)">Best day</div></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YOGA & MEDITATION -->
+      <div class="card">
+        <div class="card-title"><i class="ti ti-peace"></i> Yoga & meditation</div>
+        <div class="two-col">
+          <div>
+            <div style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text2)">🧘 Yoga — select your goal</div>
+            <div class="preset-grid" id="yogaGoalChips">
+              <div class="preset-chip" onclick="selectYogaGoal('weight_loss',this)">⚖️ Weight loss</div>
+              <div class="preset-chip" onclick="selectYogaGoal('flexibility',this)">🤸 Flexibility</div>
+              <div class="preset-chip" onclick="selectYogaGoal('stress',this)">😮‍💨 Stress relief</div>
+              <div class="preset-chip" onclick="selectYogaGoal('anxiety',this)">🌿 Anxiety</div>
+              <div class="preset-chip" onclick="selectYogaGoal('depression',this)">☀️ Depression support</div>
+              <div class="preset-chip" onclick="selectYogaGoal('strength',this)">💪 Strength</div>
+              <div class="preset-chip" onclick="selectYogaGoal('sleep',this)">😴 Better sleep</div>
+              <div class="preset-chip" onclick="selectYogaGoal('energy',this)">⚡ Energy boost</div>
+            </div>
+            <div id="yogaRoutine" style="margin-top:12px;font-size:13px;color:var(--text2);line-height:1.7"></div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text2)">🪷 Meditation — select focus</div>
+            <div class="preset-grid" id="meditationGoalChips">
+              <div class="preset-chip" onclick="selectMeditationGoal('focus',this)">🎯 Focus & clarity</div>
+              <div class="preset-chip" onclick="selectMeditationGoal('anxiety',this)">🌊 Calm anxiety</div>
+              <div class="preset-chip" onclick="selectMeditationGoal('sleep',this)">🌙 Sleep meditation</div>
+              <div class="preset-chip" onclick="selectMeditationGoal('morning',this)">🌅 Morning energy</div>
+              <div class="preset-chip" onclick="selectMeditationGoal('grief',this)">💙 Grief & healing</div>
+              <div class="preset-chip" onclick="selectMeditationGoal('confidence',this)">✨ Confidence</div>
+            </div>
+            <div id="meditationGuide" style="margin-top:12px;font-size:13px;color:var(--text2);line-height:1.7"></div>
+          </div>
+        </div>
+        <!-- SESSION TIMER -->
+        <div class="divider"></div>
+        <div style="text-align:center;padding:12px 0">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em">Session timer</div>
+          <div style="font-size:48px;font-weight:700;font-family:var(--font-display);color:var(--accent)" id="meditationTimer">05:00</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px">
+            <select id="timerDuration" style="width:100px" onchange="resetTimer()">
+              <option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option>
+            </select>
+            <button class="btn primary btn-sm" onclick="startTimer()" id="timerStartBtn"><i class="ti ti-player-play"></i> Start</button>
+            <button class="btn btn-sm ghost" onclick="resetTimer()"><i class="ti ti-refresh"></i></button>
           </div>
         </div>
       </div>
@@ -612,6 +667,46 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
         <button class="btn btn-sm primary mt-md" onclick="generateProfileSummary()"><i class="ti ti-sparkles"></i> Generate profile</button>
       </div>
       <div class="card"><div class="card-title"><i class="ti ti-user"></i> Your name</div><div class="form-group" style="max-width:240px"><input type="text" id="userNameInput" placeholder="Enter your name" oninput="updateUserName()"></div></div>
+    </div>
+
+    <!-- PRIVACY & COOKIES -->
+    <div class="page" id="page-privacy">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-shield-check"></i> Privacy policy & cookie statement</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.9">
+          <p style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px">Your privacy matters to us</p>
+          <p style="margin-bottom:16px">Last updated: June 2026</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">1. What data we collect</p>
+          <p style="margin-bottom:14px">TimeForge collects only the data you provide: your email address (for login), your name, schedule blocks, notes, health goals, budget information, and preferences. This data is stored securely in our database (Supabase) and is used solely to power the app's features for you.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">2. How we use your data</p>
+          <p style="margin-bottom:14px">Your data is used exclusively to provide you with personalised scheduling, health tracking, financial tools, and AI-powered recommendations. We do not use your data for advertising or profiling purposes.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">3. We will never sell or share your data</p>
+          <p style="margin-bottom:14px">TimeForge does not sell, rent, trade, or share your personal data with any third parties for commercial purposes. Your data belongs to you.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">4. AI processing</p>
+          <p style="margin-bottom:14px">When you use AI features, your schedule and preference data is sent to Anthropic's Claude API solely to generate responses. Anthropic's privacy policy applies to this processing. No personally identifiable information beyond what is necessary is transmitted.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">5. Cookies</p>
+          <p style="margin-bottom:14px">TimeForge uses only essential cookies required for authentication (login sessions via Supabase). We do not use advertising cookies, tracking cookies, or any third-party analytics cookies. No cookie consent banner is required as we only use strictly necessary cookies.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">6. Data storage & security</p>
+          <p style="margin-bottom:14px">All data is stored in Supabase with row-level security — meaning only you can access your own data. Passwords are hashed and never stored in plain text. Data is encrypted in transit via HTTPS.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">7. Your rights</p>
+          <p style="margin-bottom:14px">You have the right to access, correct, or delete your data at any time. You can delete your account and all associated data by contacting us. We will process all deletion requests within 30 days.</p>
+
+          <p style="font-weight:600;color:var(--text);margin-bottom:6px">8. Changes to this policy</p>
+          <p style="margin-bottom:14px">We may update this policy from time to time. Any significant changes will be communicated via the app. Continued use of TimeForge after changes constitutes acceptance of the updated policy.</p>
+
+          <div style="padding:14px;background:rgba(200,240,100,0.05);border:1px solid rgba(200,240,100,0.15);border-radius:var(--radius-sm);margin-top:8px">
+            <div style="font-weight:600;color:var(--accent);margin-bottom:4px">✦ Our commitment</div>
+            TimeForge is built with privacy by design. Your personal schedule, health data, and financial information are sensitive — we treat them that way. We will never monetize your data.
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- FINANCE -->
@@ -859,7 +954,7 @@ function todayKey(){return new Date().toISOString().slice(0,10);}
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 // ─── NAVIGATION ──────────────────────────────────────────────────────────────
-const PAGE_TITLES={dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',health:'Health & wellness',finance:'Finance',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',notifications:'Notifications',reports:'Medical & Education'};
+const PAGE_TITLES={dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',health:'Health & wellness',finance:'Finance',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',notifications:'Notifications',reports:'Medical & Education',privacy:'Privacy & cookies'};
 function showPage(name,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1210,6 +1305,83 @@ function updateUserName(){const val=document.getElementById('userNameInput').val
 
 // ─── TOAST ────────────────────────────────────────────────────────────────────
 function toast(title,body,type='info'){const c=document.getElementById('toastContainer');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<div class="toast-title">${title}</div><div class="toast-body">${body}</div>`;c.appendChild(t);setTimeout(()=>t.remove(),5000);}
+
+// ─── YOGA & MEDITATION ────────────────────────────────────────────────────────
+async function selectYogaGoal(goal, el) {
+  document.querySelectorAll('#yogaGoalChips .preset-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const routineEl = document.getElementById('yogaRoutine');
+  routineEl.innerHTML = '<div class="spinner"></div> Loading routine...';
+  try {
+    const res = await callClaude([{role:'user',content:`Suggest a specific 20-minute yoga routine for goal: "${goal}". List 5-6 poses with name, duration, and 1-sentence benefit. Format clearly. Be practical and specific.`}], 300);
+    routineEl.innerHTML = `<div style="padding:10px;background:rgba(45,212,191,0.05);border:1px solid rgba(45,212,191,0.15);border-radius:8px">${res.replace(/\n/g,'<br>')}</div>`;
+  } catch(e) { routineEl.textContent = 'Could not load routine.'; }
+}
+
+async function selectMeditationGoal(goal, el) {
+  document.querySelectorAll('#meditationGoalChips .preset-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const guideEl = document.getElementById('meditationGuide');
+  guideEl.innerHTML = '<div class="spinner"></div> Loading guide...';
+  try {
+    const res = await callClaude([{role:'user',content:`Give a simple 5-minute guided meditation for goal: "${goal}". Include: breathing technique, focus point, and 3 steps. Keep it calm, practical, and under 120 words.`}], 250);
+    guideEl.innerHTML = `<div style="padding:10px;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px">${res.replace(/\n/g,'<br>')}</div>`;
+  } catch(e) { guideEl.textContent = 'Could not load guide.'; }
+}
+
+// MEDITATION TIMER
+let timerInterval = null;
+let timerSeconds = 300;
+let timerRunning = false;
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = (parseInt(document.getElementById('timerDuration').value) || 5) * 60;
+  document.getElementById('meditationTimer').textContent = formatTimerDisplay(timerSeconds);
+  document.getElementById('timerStartBtn').innerHTML = '<i class="ti ti-player-play"></i> Start';
+}
+
+function startTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerStartBtn').innerHTML = '<i class="ti ti-player-play"></i> Resume';
+    return;
+  }
+  timerRunning = true;
+  document.getElementById('timerStartBtn').innerHTML = '<i class="ti ti-player-pause"></i> Pause';
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    document.getElementById('meditationTimer').textContent = formatTimerDisplay(timerSeconds);
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('timerStartBtn').innerHTML = '<i class="ti ti-player-play"></i> Start';
+      toast('🧘 Session complete!', 'Great job! Your meditation session is done.', 'success');
+      if (Notification.permission === 'granted') new Notification('🧘 Session complete!', {body: 'Your meditation session is done.'});
+    }
+  }, 1000);
+}
+
+function formatTimerDisplay(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+}
+
+// ─── SCHEDULE HEALTH CHECK ────────────────────────────────────────────────────
+async function runScheduleHealthCheck() {
+  const el = document.getElementById('scheduleHealthResult');
+  if (!blocks.length) { el.textContent = 'Add some schedule blocks first!'; return; }
+  el.innerHTML = '<div class="spinner"></div> Analysing your schedule...';
+  const sorted = [...blocks].sort((a,b) => mins(a.start)-mins(b.start));
+  const scheduleDesc = sorted.map(b => `${fmt(b.start)}-${fmt(b.end)}: ${b.name} (${b.type}, ${b.priority} priority)`).join(', ');
+  try {
+    const res = await callClaude([{role:'user',content:`Analyse this daily schedule and identify problems: ${scheduleDesc}\n\nCheck for: 1) Back-to-back sessions without breaks, 2) Unrealistic time allocations, 3) Poor task ordering (e.g. hard tasks at wrong times), 4) Missing meals/breaks/sleep, 5) Overloading. Format as numbered points. Start each with ✅ (good) or ⚠️ (issue) or 💡 (suggestion). Be specific and actionable. Max 8 points.`}], 400);
+    el.innerHTML = `<div style="padding:14px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)">${res.replace(/\n/g,'<br>')}</div>`;
+  } catch(e) { el.textContent = 'Could not analyse schedule.'; }
+}
 
 // ─── FINANCE ──────────────────────────────────────────────────────────────────
 async function fetchMarkets(){
