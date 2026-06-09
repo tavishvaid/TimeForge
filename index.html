@@ -221,6 +221,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
   .nav-item i { font-size:14px; }
   .nav-badge { font-size:9px; padding:1px 5px; }
   .sidebar-footer { display:none; }
+  #mobileSignOutBtn { display:flex !important; }
   .main { height:auto; min-height:100vh; }
   .topbar { padding:6px 12px; height:auto; min-height:44px; flex-wrap:nowrap; gap:6px; align-items:center; }
   .topbar-right { gap:4px; flex-shrink:0; }
@@ -281,6 +282,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
   .nav-item { padding:5px 8px; font-size:11px; white-space:nowrap; flex-shrink:0; }
   .nav-item i { font-size:13px; }
   .sidebar-footer { display:none; }
+  #mobileSignOutBtn { display:flex !important; }
   .main { height:auto; }
   .topbar { height:38px; padding:0 10px; }
   .topbar-right .btn { font-size:10px; padding:4px 7px; }
@@ -443,6 +445,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-medical"></i> Medical & Edu</div>
     <div class="nav-item" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</div>
     <div class="nav-item" onclick="showPage('privacy',this)"><i class="ti ti-shield-check"></i> Privacy & cookies</div>
+    <div class="nav-item" id="mobileSignOutBtn" onclick="signOut()" style="display:none;color:var(--red);margin-left:auto;flex-shrink:0"><i class="ti ti-logout"></i> Sign out</div>
   </nav>
   <div class="sidebar-footer" style="position:relative">
     <div class="user-dropdown" id="userDropdown" style="position:absolute;bottom:110%;left:0;right:0;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:4px;display:none;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
@@ -932,7 +935,8 @@ async function handleAuth() {
 }
 
 async function signOut() {
-  await sb.auth.signOut();
+  try { await sb.auth.signOut(); } catch(e) {}
+  try { localStorage.clear(); } catch(e) {}
   document.getElementById('userDropdown').style.display = 'none';
   window.location.reload();
 }
