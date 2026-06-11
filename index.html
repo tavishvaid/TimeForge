@@ -455,7 +455,8 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
     <div class="nav-item" onclick="showPage('gratitude',this)"><i class="ti ti-heart"></i> Gratitude <span class="nav-badge" id="gratitudeBadge" style="display:none;background:var(--red)">!</span></div>
     <div class="nav-section">Settings</div>
     <div class="nav-item" onclick="showPage('notifications',this)"><i class="ti ti-bell"></i> Notifications</div>
-    <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-file-medical"></i> Medical & Edu</div>
+    <div class="nav-item" onclick="showPage('medical',this)"><i class="ti ti-file-medical"></i> Medical Records</div>
+    <div class="nav-item" onclick="showPage('reports',this)"><i class="ti ti-school"></i> Education</div>
     <div class="nav-item" onclick="openSurvey()"><i class="ti ti-clipboard-check"></i> Weekly survey</div>
     <div class="nav-item" onclick="showPage('privacy',this)"><i class="ti ti-shield-check"></i> Privacy & cookies</div>
     <a class="nav-item" href="mailto:time.forge5@gmail.com" style="display:none;flex-shrink:0;text-decoration:none;color:var(--text)" id="mobileHelpdeskBtn"><i class="ti ti-headset"></i> Helpdesk</a>
@@ -808,15 +809,52 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:po
       </div>
     </div>
 
-    <!-- MEDICAL & EDUCATION -->
+    <!-- MEDICAL RECORDS (OTP protected) -->
+    <div class="page" id="page-medical">
+      <!-- OTP Lock Screen -->
+      <div id="medicalLock" class="card" style="max-width:380px;margin:40px auto;text-align:center">
+        <div style="font-size:40px;margin-bottom:12px">🔒</div>
+        <div class="card-title" style="justify-content:center">Medical Records are protected</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:20px" id="medLockSubtitle">Enter your 4-digit PIN to access your records. Works offline too.</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px">
+          <input type="password" inputmode="numeric" maxlength="4" id="medPinInput" placeholder="••••"
+            style="width:100px;text-align:center;font-size:24px;letter-spacing:8px;padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text)"
+            onkeydown="if(event.key==='Enter')submitMedPin()">
+        </div>
+        <div id="medPinError" style="font-size:12px;color:var(--red);margin-bottom:12px;display:none">Incorrect PIN. Try again.</div>
+        <button class="btn primary" style="width:100%" onclick="submitMedPin()" id="medPinBtn">Unlock</button>
+        <div id="medSetPinNote" style="font-size:11px;color:var(--text3);margin-top:12px;display:none">First time? This will set your PIN.</div>
+      </div>
+      <!-- Unlocked Content -->
+      <div id="medicalContent" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="ti ti-file-medical"></i> Medical Reports
+            <button class="btn btn-sm ghost" style="margin-left:auto" onclick="lockMedical()"><i class="ti ti-lock"></i> Lock</button>
+          </div>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:4px">Files are stored on your device — accessible even without internet.</p>
+          <div style="font-size:11px;color:var(--green);margin-bottom:16px"><i class="ti ti-wifi-off"></i> Offline ready</div>
+          <div class="upload-zone" style="margin-bottom:12px"><input type="file" accept=".pdf,.txt,.doc,.docx,.jpg,.jpeg,.png" multiple onchange="handleMedUpload(this)"><div class="upload-icon"><i class="ti ti-file-medical"></i></div><div class="upload-label">Drop or click to upload</div><div class="upload-sub">PDF, DOC, TXT, Images</div></div>
+          <div id="medFilesList"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="ti ti-shield-lock"></i> PIN Settings</div>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Change your medical records PIN.</p>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input type="password" inputmode="numeric" maxlength="4" id="medNewPin" placeholder="New PIN (4 digits)" style="width:160px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px">
+            <button class="btn btn-sm primary" onclick="changeMedPin()"><i class="ti ti-key"></i> Update PIN</button>
+          </div>
+          <div id="medPinChangeMsg" style="font-size:12px;margin-top:8px;display:none"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
     <div class="page" id="page-reports">
       <div class="card">
-        <div class="card-title"><i class="ti ti-file-medical"></i> Upload reports</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Upload medical or educational reports so the AI can personalize your schedule.</p>
-        <div class="two-col">
-          <div><label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Medical reports</label><div class="upload-zone"><input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('medical',this)"><div class="upload-icon"><i class="ti ti-file-medical"></i></div><div class="upload-label">Drop or click</div><div class="upload-sub">PDF, DOC, TXT</div></div><div id="medFiles"></div></div>
-          <div><label style="display:block;margin-bottom:8px;font-size:13px;font-weight:500">Educational reports</label><div class="upload-zone"><input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('educational',this)"><div class="upload-icon"><i class="ti ti-school"></i></div><div class="upload-label">Drop or click</div><div class="upload-sub">PDF, DOC, TXT</div></div><div id="eduFiles"></div></div>
-        </div>
+        <div class="card-title"><i class="ti ti-school"></i> Educational Reports</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Upload report cards, transcripts, or academic documents so Forge can personalize your study schedule.</p>
+        <div class="upload-zone"><input type="file" accept=".pdf,.txt,.doc,.docx" multiple onchange="handleUpload('educational',this)"><div class="upload-icon"><i class="ti ti-school"></i></div><div class="upload-label">Drop or click to upload</div><div class="upload-sub">PDF, DOC, TXT</div></div>
+        <div id="eduFiles" style="margin-top:10px"></div>
       </div>
       <div class="card">
         <div class="card-title"><i class="ti ti-robot"></i> Profile summary</div>
@@ -1113,7 +1151,7 @@ function todayKey(){return new Date().toISOString().slice(0,10);}
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 // ─── NAVIGATION ──────────────────────────────────────────────────────────────
-const PAGE_TITLES={dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',health:'Health & wellness',finance:'Finance',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',gratitude:'Gratitude Journal',notifications:'Notifications',reports:'Medical & Education',privacy:'Privacy & cookies'};
+const PAGE_TITLES={dashboard:'Dashboard',checklist:"Today's checklist",add:'Add block',ai:'AI scheduler',health:'Health & wellness',finance:'Finance',weekly:'Weekly report',timeline:'Timeline',notes:'Notes',gratitude:'Gratitude Journal',notifications:'Notifications',medical:'Medical Records',reports:'Education',privacy:'Privacy & cookies'};
 function showPage(name,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1121,6 +1159,7 @@ function showPage(name,el){
   if(el)el.classList.add('active');
   document.getElementById('topbarTitle').textContent=PAGE_TITLES[name]||name;
   if(name==='gratitude')loadGratitudePage();
+  if(name==='medical')showPage_medical();
   render();
 }
 function openModal(id){document.getElementById(id).classList.add('open');}
@@ -1547,7 +1586,106 @@ function handleUpload(type,input){
   saveAll();renderUploads();toast('Uploaded','Files ready for AI analysis.','success');
 }
 function renderUploads(){
-  ['medical','educational'].forEach(type=>{const el=document.getElementById(type==='medical'?'medFiles':'eduFiles');el.innerHTML=uploadedFiles[type].map(f=>`<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}</div>`).join('');});
+  const el=document.getElementById('eduFiles');
+  if(el) el.innerHTML=uploadedFiles.educational.map(f=>`<div class="upload-file"><i class="ti ti-file-text"></i>${f.name}</div>`).join('');
+}
+
+// ─── MEDICAL RECORDS (PIN + OFFLINE) ─────────────────────────────────────────
+function medHash(pin){
+  // simple hash — not cryptographic but enough for local PIN
+  let h=0;for(let i=0;i<pin.length;i++){h=((h<<5)-h)+pin.charCodeAt(i);h|=0;}return h.toString(36);
+}
+function showPage_medical(){
+  const stored=localStorage.getItem('medPin');
+  const note=document.getElementById('medSetPinNote');
+  if(!stored&&note) note.style.display='block';
+  // if already unlocked this session
+  if(sessionStorage.getItem('medUnlocked')==='1'){
+    document.getElementById('medicalLock').style.display='none';
+    document.getElementById('medicalContent').style.display='block';
+    renderMedFiles();
+  } else {
+    document.getElementById('medicalLock').style.display='block';
+    document.getElementById('medicalContent').style.display='none';
+    document.getElementById('medPinError').style.display='none';
+    document.getElementById('medPinInput').value='';
+    setTimeout(()=>document.getElementById('medPinInput').focus(),100);
+  }
+}
+function submitMedPin(){
+  const pin=document.getElementById('medPinInput').value.trim();
+  if(pin.length<4){document.getElementById('medPinError').textContent='PIN must be 4 digits.';document.getElementById('medPinError').style.display='block';return;}
+  const stored=localStorage.getItem('medPin');
+  if(!stored){
+    // first time — set PIN
+    localStorage.setItem('medPin',medHash(pin));
+    sessionStorage.setItem('medUnlocked','1');
+    document.getElementById('medicalLock').style.display='none';
+    document.getElementById('medicalContent').style.display='block';
+    renderMedFiles();
+    toast('PIN set','Your medical records PIN is set. Keep it safe!','success');
+  } else {
+    if(medHash(pin)===stored){
+      sessionStorage.setItem('medUnlocked','1');
+      document.getElementById('medPinError').style.display='none';
+      document.getElementById('medicalLock').style.display='none';
+      document.getElementById('medicalContent').style.display='block';
+      renderMedFiles();
+    } else {
+      document.getElementById('medPinError').textContent='Incorrect PIN. Try again.';
+      document.getElementById('medPinError').style.display='block';
+      document.getElementById('medPinInput').value='';
+    }
+  }
+}
+function lockMedical(){
+  sessionStorage.removeItem('medUnlocked');
+  document.getElementById('medicalLock').style.display='block';
+  document.getElementById('medicalContent').style.display='none';
+  document.getElementById('medPinInput').value='';
+  document.getElementById('medPinError').style.display='none';
+}
+function changeMedPin(){
+  const newPin=document.getElementById('medNewPin').value.trim();
+  const msg=document.getElementById('medPinChangeMsg');
+  if(newPin.length<4){msg.style.color='var(--red)';msg.textContent='PIN must be 4 digits.';msg.style.display='block';return;}
+  localStorage.setItem('medPin',medHash(newPin));
+  document.getElementById('medNewPin').value='';
+  msg.style.color='var(--green)';msg.textContent='✓ PIN updated successfully.';msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',3000);
+}
+function handleMedUpload(input){
+  const files=Array.from(input.files);
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const medFiles=JSON.parse(localStorage.getItem('medFiles')||'[]');
+      medFiles.push({name:file.name,size:file.size,date:new Date().toLocaleDateString(),dataUrl:e.target.result});
+      localStorage.setItem('medFiles',JSON.stringify(medFiles));
+      renderMedFiles();
+      toast('Uploaded',`${file.name} saved for offline access.`,'success');
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function renderMedFiles(){
+  const el=document.getElementById('medFilesList');if(!el)return;
+  const files=JSON.parse(localStorage.getItem('medFiles')||'[]');
+  if(!files.length){el.innerHTML='<div class="empty"><i class="ti ti-file-off"></i><p>No medical files uploaded yet.</p></div>';return;}
+  el.innerHTML=files.map((f,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:8px">
+      <i class="ti ti-file-medical" style="color:var(--accent);font-size:18px;flex-shrink:0"></i>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${f.name}</div>
+        <div style="font-size:11px;color:var(--text3)">${f.date} · ${(f.size/1024).toFixed(1)} KB · <span style="color:var(--green)">Offline ready</span></div>
+      </div>
+      <a href="${f.dataUrl}" download="${f.name}" class="btn btn-sm ghost" title="Download"><i class="ti ti-download"></i></a>
+      <button class="btn btn-sm ghost" style="color:var(--red)" onclick="deleteMedFile(${i})" title="Delete"><i class="ti ti-trash"></i></button>
+    </div>`).join('');
+}
+function deleteMedFile(i){
+  const files=JSON.parse(localStorage.getItem('medFiles')||'[]');
+  files.splice(i,1);localStorage.setItem('medFiles',JSON.stringify(files));renderMedFiles();
 }
 async function generateProfileSummary(){
   const el=document.getElementById('profileSummary');el.innerHTML='<div class="spinner"></div> Analysing...';
