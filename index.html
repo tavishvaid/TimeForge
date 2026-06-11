@@ -1395,12 +1395,39 @@ async function runMotivate(){
 // ─── SOMETHING CAME UP ────────────────────────────────────────────────────────
 async function handleCameUp(type){
   const el=document.getElementById('cameUpResult');el.style.display='block';el.innerHTML='<div class="spinner"></div> AI is rescheduling your day...';
-  const remaining=blocks.filter(b=>mins(b.start)>nowMins()&&!checklist[blockId(b)]?.done).map(b=>`${b.name} (${fmt(b.start)}-${fmt(b.end)})`).join(', ');
+  const remainingBlocks=blocks.filter(b=>mins(b.start)>nowMins()&&!checklist[blockId(b)]?.done);
+  const remaining=remainingBlocks.map(b=>`${b.name} (${fmt(b.start)}-${fmt(b.end)})`).join(', ');
   try{
-    const res=await callClaude([{role:'user',content:`A "${type}" just came up for the user. Their remaining tasks today: ${remaining||'none'}. Briefly (2 sentences) suggest how to handle the rest of the day — which tasks to keep, skip, or move. Be practical and encouraging.`}],150);
-    el.innerHTML=`<div style="padding:10px;background:rgba(110,142,245,0.05);border-radius:8px;border:1px solid rgba(110,142,245,0.1)"><div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:4px">AI SUGGESTION</div>${res}</div>`;
-    toast('Schedule updated',`AI adjusted for your ${type.toLowerCase()}.`,'success');
-  }catch(e){el.innerHTML='Could not generate suggestion.';}
+    const res=await callClaude([{role:'user',content:`A "${type}" just came up. Remaining tasks: ${remaining||'none'}.
+Return ONLY valid JSON in this exact format (no markdown, no explanation):
+{"skip":["exact task name 1","exact task name 2"],"keep":["exact task name 3"],"message":"one encouraging sentence about the adjusted plan"}
+Rules: skip low-priority or flexible tasks, keep urgent/important ones. Use the exact task names from the list.`}],300);
+
+    let plan;
+    try{
+      const jsonMatch=res.match(/\{[\s\S]*\}/);
+      plan=JSON.parse(jsonMatch?jsonMatch[0]:res);
+    }catch(e){ throw new Error('Could not parse AI response'); }
+
+    // Apply skips — mark those blocks as done (dismissed) in checklist
+    let skipped=0;
+    (plan.skip||[]).forEach(name=>{
+      const b=blocks.find(bl=>bl.name.trim().toLowerCase()===name.trim().toLowerCase()&&mins(bl.start)>nowMins());
+      if(b){const id=blockId(b);checklist[id]={...checklist[id]||{},done:true,skipped:true};skipped++;}
+    });
+
+    if(skipped>0){saveAll();render();}
+
+    const skipList=(plan.skip||[]).length?`<div style="margin-top:8px"><span style="font-size:11px;font-weight:600;color:var(--red)">SKIPPED (${skipped})</span><ul style="margin:4px 0 0 16px;font-size:12px;color:var(--text2)">${(plan.skip||[]).map(n=>`<li>${n}</li>`).join('')}</ul></div>`:'';
+    const keepList=(plan.keep||[]).length?`<div style="margin-top:8px"><span style="font-size:11px;font-weight:600;color:var(--green)">KEEPING</span><ul style="margin:4px 0 0 16px;font-size:12px;color:var(--text2)">${(plan.keep||[]).map(n=>`<li>${n}</li>`).join('')}</ul></div>`:'';
+
+    el.innerHTML=`<div style="padding:12px;background:rgba(110,142,245,0.05);border-radius:8px;border:1px solid rgba(110,142,245,0.1)">
+      <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">FORGE RESCHEDULED YOUR DAY</div>
+      <div style="font-size:13px;color:var(--text2)">${plan.message||''}</div>
+      ${skipList}${keepList}
+    </div>`;
+    toast('Schedule updated',`${skipped} task${skipped!==1?'s':''} cleared for your ${type.toLowerCase()}.`,'success');
+  }catch(e){el.innerHTML='<span style="color:var(--red)">Could not reschedule. Try again.</span>';}
 }
 
 // ─── EXAM MODE ────────────────────────────────────────────────────────────────
