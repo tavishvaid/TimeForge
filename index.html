@@ -1786,13 +1786,7 @@ function loadIcalUrl() {
 
 function parseICS(ics) {
   const events = [];
-  const lines = ics.replace(/
- /g, '').replace(/
-/g, '
-').replace(/
-/g, '
-').split('
-');
+  const lines = ics.replace(/\r\n /g, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
   let ev = null;
   for (const line of lines) {
     if (line === 'BEGIN:VEVENT') { ev = {}; continue; }
